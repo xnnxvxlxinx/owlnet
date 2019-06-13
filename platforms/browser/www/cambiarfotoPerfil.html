@@ -106,16 +106,17 @@ $(function(){
         $("#FotoPerfil").on("submit", function(e){
 			
             e.preventDefault();
-		
+		document.getElementById('ajax-loader').style.display='block';
 
 				var UID = localStorage.getItem('SesionID') || '<empty>';
 				var Usuario = localStorage.getItem('SesionUsuario') || '<empty>';
 				if(UriImagnes!=''){
+				document.getElementById('ajax-loader').style.display='none';
 var win = function(r) {
    var mensaje=document.getElementById('mensaje_javascript');
 		mensaje.style.display='block';
 var texto="<p>Se ha subido su imagen con exito.</p>";
-texto= texto + "<button type='button' onclick='location.href=\"../index.html\"; cerrar(\"mensaje_javascript\");'>Continuar</button>";
+texto= texto + "<button type='button' onclick='location.href=\"index.html\"; cerrar(\"mensaje_javascript\");'>Continuar</button>";
 //texto= texto + "<button type='button' onclick='cerrar(\"mensaje_javascript\")'>Regresar</button>";
 		mensaje.childNodes[0].innerHTML=texto;
 }
@@ -124,7 +125,7 @@ var fail = function(error) {
 var mensaje=document.getElementById('mensaje_javascript');
 		mensaje.style.display='block';
 var texto="<p>Error al enviar su imagen.</p>";
-texto= texto + "<button type='button' onclick='location.href=\"../index.html\"; cerrar(\"mensaje_javascript\");'>Salir</button>";
+texto= texto + "<button type='button' onclick='location.href=\"index.html\"; cerrar(\"mensaje_javascript\");'>Salir</button>";
 texto= texto + "<button type='button' onclick='cerrar(\"mensaje_javascript\")'>Volver a intentar</button>";
 		mensaje.childNodes[0].innerHTML=texto;
 }	

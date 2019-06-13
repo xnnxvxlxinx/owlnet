@@ -25,18 +25,27 @@ var URLdomain = window.location.host;
 var protocolo = window.location.protocol;
 var pathname = window.location.pathname;
 //var url=  "file:///android_asset/www/" ;
-var url=protocolo + "//" + URLdomain +"/";
+var url= "";
+//var url=protocolo + "//" + URLdomain +"/";
 var resolucionheight=screen.height;
-var resolucionheight10=resolucionheight*0.10;
+//var resolucionheight10=resolucionheight*0.10;
+var resolucionheight10="4";
 var Usuario = localStorage.getItem('SesionUsuario') || '<empty>';
 var SesionID = localStorage.getItem('SesionID') || '<empty>';
-document.getElementById('cabeza').style.height=resolucionheight10+'px';
+/*document.getElementById('cabeza').style.height=resolucionheight10+'px';
 document.getElementById('logo').style.height=resolucionheight10+'px';
 document.getElementById('logoMain').style.height=resolucionheight10+'px';
 document.getElementById('MenuHamburgueza').style.height=resolucionheight10+'px';
 document.getElementById('MenuCabeza').style.height=resolucionheight*0.9+'px';
 document.getElementById('MenuCabezaC').style.height=resolucionheight+'px';
-document.getElementById('MenuCabeza').style.top=resolucionheight10+'px';
+document.getElementById('MenuCabeza').style.top=resolucionheight10+'px';*/
+document.getElementById('cabeza').style.height=resolucionheight10+'em';
+document.getElementById('logo').style.height=resolucionheight10+'em';
+document.getElementById('logoMain').style.height=resolucionheight10+'em';
+document.getElementById('MenuHamburgueza').style.height=resolucionheight10+'em';
+document.getElementById('MenuCabeza').style.height=resolucionheight*0.9+'em';
+document.getElementById('MenuCabezaC').style.height=resolucionheight+'em';
+document.getElementById('MenuCabeza').style.top=resolucionheight10+'em';
 
 $(function(){
         $("#buscadorformcabeza").on("submit", function(e){

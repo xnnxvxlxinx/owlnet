@@ -39,9 +39,9 @@ div#admin_usuarios_imagen:hover{
 	height:100%;
 }
 #admin_usuarios_contenido{
-	
-	padding:1em 1.5%;
-	width:75%;
+	text-align:center;
+	padding:1em 0;
+	width:100%;
 	float:left;
 }
 .oculto{
@@ -129,7 +129,7 @@ input[type="text"]:not(#search_bar_cabeza), input[type="password"] {
 
   
   button{
-	background: #00E676;
+	/*background: #00E676;
 	border: 0;
 	width: 150px;
 	height: 40px;
@@ -138,10 +138,19 @@ input[type="text"]:not(#search_bar_cabeza), input[type="password"] {
 	border-radius: 3px;
 	color: white;
 	cursor: pointer;
-	transition: background 0.3s ease-in-out;
+	transition: background 0.3s ease-in-out;*/
+	background: #4FC3F7;
+    border: 0;
+    width: 95%;
+    height: 3em;
+    margin: 0.5em 0.5%;
+    border-radius: 3px;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
   }
   button:hover {
-	background: #16aa56;
+	background: #0277BD;
   }
  button:disabled {
 	background: #ff0076;
@@ -288,4 +297,20 @@ select option:hover {
 output img{
 	max-width:200px;
 	max-height:200px;
+}
+textarea{
+	width: 90%;
+    height: 5em;
+    padding: 7px 0px;
+    /* border-bottom: 1px solid rgba(255,255,255,0.04); */
+    /* border: 1px solid black; */
+    /* outline: none; */
+    border: none;
+    background: #EDEDED;
+    color: #46485c;
+    box-shadow: 2px 2px 2px rgba(0,0,0,0.3), inset 0px 1px 0px rgba(255,255,255,0.07);
+    text-align: left;
+    padding-left: 1em;
+    margin-bottom: 8px;
+    font-size: 12px;
 }

@@ -16,10 +16,11 @@
 	<script src="js/jquerymobile/jquery-3.2.1.min.js"></script>
  <script src="js/jquerymobile/jquery.mobile-1.4.5.min.js"></script>
  <script type="text/javascript" src="cordova.js"></script>
+  <script src="js/conexionDomino.js"></script>
 	<script>
 
 	function initialize() {
-	
+	var urlM=obtenerURL();
 	$.get("cabeza.html", function(htmlexterno){
    $("#cabecera").html(htmlexterno);
     	});
@@ -27,23 +28,21 @@
 		document.getElementById("InNombre").value=nombre;
 		var mail=localStorage.getItem('SesionMail') || ' ';
 		document.getElementById("InMail").value=mail;
-		var direccion=localStorage.getItem('SesionDireccion') || ' ';
+		var direccion=localStorage.getItem('SesionDescripcion') || ' ';
+		if(direccion=='null'){
+		direccion='';
+		}
 		document.getElementById("InDireccion").value=direccion;
 		var telefono=localStorage.getItem('SesionTelefono') || ' ';
-		document.getElementById("InTelefono").value=direccion;
-		var Nivel = localStorage.getItem('SesionNivel') || '<empty>';
+		document.getElementById("InTelefono").value=telefono;
 		var UID = localStorage.getItem('SesionID') || '<empty>';
 	var C=document.getElementsByClassName("UID");
 for(var i=0; i<C.length; i++){
 C[i].value=UID;
 }	
-if(Nivel==2){
-document.getElementById('botonDecripcion').innerHTML="<button type='button' onclick='location.href=\"descripcionE.html\";'>Descripci&oacute;n de mi Perfil</button></br>";
-}
-if(Nivel==3){
-document.getElementById('botonDecripcion').innerHTML="<button type='button' onclick='location.href=\"descripcionP.html\";'>Descripci&oacute;n de mi Perfil</button></br>";
 
-}
+
+
 		}
 			function cancelarconfiguauario(id){
 	document.getElementById(id).style.display='none';
@@ -64,7 +63,7 @@ $(function(){
 			document.getElementById('ajax-loader').style.display='block';
 			setTimeout(function(){
             $.ajax({
-                url: "https://nirjob.com/PhoneGap/administrar/micuenta.php",
+                url: urlM + "/app/micuenta.php",
                 type: "post",
                 dataType: "json",
                 data: formData,
@@ -80,7 +79,7 @@ document.getElementById("InNombre").value=data[0].Cambio;
 var mensaje=document.getElementById('mensaje_javascript');
 		mensaje.style.display='block';
 var texto="<p>Se ha actualizado sus datos.</p>";
-texto= texto + "<button type='button' onclick='location.href=\"../index.html\"; cerrar(\"mensaje_javascript\");'>Continuar</button>";
+texto= texto + "<button type='button' onclick='location.href=\"index.html\"; cerrar(\"mensaje_javascript\");'>Continuar</button>";
 texto= texto + "<button type='button' onclick='cerrar(\"mensaje_javascript\")'>Regresar</button>";
 		mensaje.childNodes[0].innerHTML=texto;
 				}else{
@@ -104,7 +103,7 @@ texto= texto + "<button type='button' onclick='cerrar(\"mensaje_javascript\")'>R
 			document.getElementById('ajax-loader').style.display='block';
 			setTimeout(function(){
             $.ajax({
-                url: "https://nirjob.com/PhoneGap/administrar/micuenta.php",
+                url: urlM + "/app/micuenta.php",
                 type: "post",
                 dataType: "json",
                 data: formData,
@@ -120,7 +119,7 @@ document.getElementById("InMail").value=data[0].Cambio;
 var mensaje=document.getElementById('mensaje_javascript');
 		mensaje.style.display='block';
 var texto="<p>Se ha actualizado sus datos.</p>";
-texto= texto + "<button type='button' onclick='location.href=\"../index.html\"; cerrar(\"mensaje_javascript\");'>Continuar</button>";
+texto= texto + "<button type='button' onclick='location.href=\"index.html\"; cerrar(\"mensaje_javascript\");'>Continuar</button>";
 texto= texto + "<button type='button' onclick='cerrar(\"mensaje_javascript\")'>Regresar</button>";
 		mensaje.childNodes[0].innerHTML=texto;
 				}else{
@@ -144,7 +143,7 @@ texto= texto + "<button type='button' onclick='cerrar(\"mensaje_javascript\")'>R
 			document.getElementById('ajax-loader').style.display='block';
 			setTimeout(function(){
             $.ajax({
-                url: "https://nirjob.com/PhoneGap/administrar/micuenta.php",
+                url: urlM + "/app/micuenta.php",
                 type: "post",
                 dataType: "json",
                 data: formData,
@@ -155,12 +154,12 @@ texto= texto + "<button type='button' onclick='cerrar(\"mensaje_javascript\")'>R
 				var tamanio=data.length;
 			
 				if(data[0].Error=='0' && tamanio==1){
-				localStorage.setItem("SesionDireccion", data[0].Cambio);
+				localStorage.setItem("SesionDescripcion", data[0].Cambio);
 document.getElementById("InDireccion").value=data[0].Cambio;
 var mensaje=document.getElementById('mensaje_javascript');
 		mensaje.style.display='block';
 var texto="<p>Se ha actualizado sus datos.</p>";
-texto= texto + "<button type='button' onclick='location.href=\"../index.html\"; cerrar(\"mensaje_javascript\");'>Continuar</button>";
+texto= texto + "<button type='button' onclick='location.href=\"index.html\"; cerrar(\"mensaje_javascript\");'>Continuar</button>";
 texto= texto + "<button type='button' onclick='cerrar(\"mensaje_javascript\")'>Regresar</button>";
 		mensaje.childNodes[0].innerHTML=texto;
 				}else{
@@ -185,7 +184,7 @@ texto= texto + "<button type='button' onclick='cerrar(\"mensaje_javascript\")'>R
 			document.getElementById('ajax-loader').style.display='block';
 			setTimeout(function(){
             $.ajax({
-                url: "https://nirjob.com/PhoneGap/administrar/micuenta.php",
+                url: urlM + "/app/micuenta.php",
                 type: "post",
                 dataType: "json",
                 data: formData,
@@ -202,7 +201,7 @@ document.getElementById("InTelefono").value=data[0].Cambio;
 var mensaje=document.getElementById('mensaje_javascript');
 		mensaje.style.display='block';
 var texto="<p>Se ha actualizado sus datos.</p>";
-texto= texto + "<button type='button' onclick='location.href=\"../index.html\"; cerrar(\"mensaje_javascript\");'>Continuar</button>";
+texto= texto + "<button type='button' onclick='location.href=\"index.html\"; cerrar(\"mensaje_javascript\");'>Continuar</button>";
 texto= texto + "<button type='button' onclick='cerrar(\"mensaje_javascript\")'>Regresar</button>";
 		mensaje.childNodes[0].innerHTML=texto;
 				}else{
@@ -226,7 +225,7 @@ texto= texto + "<button type='button' onclick='cerrar(\"mensaje_javascript\")'>R
 			document.getElementById('ajax-loader').style.display='block';
 			setTimeout(function(){
             $.ajax({
-                url: "https://nirjob.com/PhoneGap/administrar/micuenta.php",
+                url: urlM + "/app/micuenta.php",
                 type: "post",
                 dataType: "json",
                 data: formData,
@@ -240,7 +239,7 @@ texto= texto + "<button type='button' onclick='cerrar(\"mensaje_javascript\")'>R
 var mensaje=document.getElementById('mensaje_javascript');
 		mensaje.style.display='block';
 var texto="<p>Se ha actualizado sus datos.</p>";
-texto= texto + "<button type='button' onclick='location.href=\"../index.html\"; cerrar(\"mensaje_javascript\");'>Continuar</button>";
+texto= texto + "<button type='button' onclick='location.href=\"index.html\"; cerrar(\"mensaje_javascript\");'>Continuar</button>";
 texto= texto + "<button type='button' onclick='cerrar(\"mensaje_javascript\")'>Regresar</button>";
 		mensaje.childNodes[0].innerHTML=texto;
 				}else{
@@ -294,9 +293,10 @@ $("#" + div).fadeOut(150);
 				<button type='button' onclick='cancelarconfiguauario("configuauario_mail")' class='cancelar_edit'></button>
 				</form>
 				</div>
-				<div class='loginEdit'><button type='button' onclick='configuauario("configuauario_direccion")'>Editar Direcci&oacute;n</button></br>
+				<div class='loginEdit'><button type='button' onclick='configuauario("configuauario_direccion")'>Editar Descripci&oacute;n</button></br>
 				<form   method='post' class='oculto' id='configuauario_direccion'>
-				<input type='text' id="InDireccion" name='direccion' required placeholder='Direcci&oacute;n' value=''/>
+				<textarea id="InDireccion" name='direccion' required value=''></textarea>
+				 <!--<input type='text' id="InDireccion" name='direccion' required placeholder='Direcci&oacute;n' value=''/>-->
 				<input type='text' name='UID'  required style="display:none" class="UID" value='' />
 				<input type='text' name='editar_direccion'  required style="display:none"  value='Editar' />
 				<button type='submit' class='editSubmit'  value='Editar'></button>
@@ -308,7 +308,7 @@ $("#" + div).fadeOut(150);
 				<input type='text' id="InTelefono" name='telefono' required placeholder='Tel&eacute;fono' value=''/>
 				<input type='text' name='UID'  required style="display:none" class="UID" value='' />
 				<input type='text' name='editar_telefono'  required style="display:none"  value='Editar' />
-				<input type='submit' class='editSubmit'  />
+					<button type='submit' class='editSubmit'  value='Editar'></button>
 				<button type='button' onclick='cancelarconfiguauario("configuauario_telefono")' class='cancelar_edit'></button>
 				</form>
 				</div>
@@ -324,9 +324,6 @@ $("#" + div).fadeOut(150);
 				</div>
 				<div class='loginEdit'>
 				<button type='button' onclick='location.href="cambiarfotoPerfil.html";'>Editar Foto de Perfil</button></br>
-				</div>
-				<div id='botonDecripcion' class='loginEdit'>
-				
 				</div>
 			</div></div>
 	<!--	<div id='form_inicio_sesion' class='form_inicio'>
