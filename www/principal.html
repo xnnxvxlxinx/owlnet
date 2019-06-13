@@ -1,53 +1,353 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
-
 <head>
-    <meta charset="utf-8" />
-    <meta name="format-detection" content="telephone=no" />
-    <meta name="msapplication-tap-highlight" content="no" />
-    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
-    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" />
-   	<link rel="stylesheet" type="text/css" href="css/ajax-loader.css">
-	 	<link rel="stylesheet" type="text/css" href="css/principal.css">
-    <title>Owl Net</title>
-		<link rel="stylesheet" type="text/css" href="css/mensaje_javascript.css">
-	<script src="js/jquerymobile/jquery-3.2.1.min.js"></script>
+ <title>Inicio</title>
+<meta http-equiv="Expires" content="0">
+  <meta http-equiv="Last-Modified" content="0">
+  <meta http-equiv="Cache-Control" content="no-cache, mustrevalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta
+  name="viewport"
+  content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css" href="css/cabeza.css">	
+
+
+	<link rel="stylesheet" type="text/css" href="css/errores.css">
+	<link rel="stylesheet" type="text/css" href="css/ajax-loader.css">
+		<link rel="stylesheet" type="text/css" href="css/estrellitasM.css">
+	<link rel="stylesheet" type="text/css" href="css/productosBuscador.css">
+	<link rel="stylesheet" type="text/css" href="css/index_style.css">
+
+<script src="js/jquerymobile/jquery-3.2.1.min.js"></script>
  <script src="js/jquerymobile/jquery.mobile-1.4.5.min.js"></script>
- <script src="js/conexionDomino.js"></script>
-	<script>
-	var conn = false;
-	var urlM=obtenerURL();
-	var resolucionheight=screen.height;
-	/*var resolucionheight10=resolucionheight*0.20;
-	document.getElementById('menu').style.height=resolucionheight10+'px';*/
-	</script>
+ <script type="text/javascript" src="cordova.js"></script>
+  <script src="js/conexionDomino.js"></script>
 </head>
+<body >
+<script type='text/javascript'> 
+var urlM=obtenerURL();
+ document.addEventListener("deviceready", onDeviceReady, false);
+    function onDeviceReady() {
+        primero();
+    }
+						var GetBusqueda='';
+						var GetbusTag='';
+						var buscheck=''; 
+						var contproductos=0;
+						var contproductosMostrar=0;
+						function primero(){
+	$.get("cabeza.html", function(html){
+   $("#cabecera").html(html);
 
-<body>
-    <div id='contenido'>
-	<div id='menu'>
-        <div id='logo'></div>
-		<div id='boton'></div>
-		<div id='boton2'></div>
-		</div>        
-    <div id='buscador'>
-        <div id='barra'></div>
-        <div id='categorias'></div>
-	</div>
+    	});
+	$.get(urlM+"/php/subhead.php", function(html){
+   $("#subHeadID").html(html);
+cargarMas2();
+    	});	
+var resolucionheight=screen.height;
+var resolucionheight10=resolucionheight*0.15;
+}
+						function initialize() {
+						var pathname = window.location.pathname;
+							var URLsearch = window.location.search;	
+							
+							if(URLsearch==''){
+							
+							GetBusqueda='';
+							GetbusTag='';
+							}else{
+						
+								URLsearch=URLsearch.replace('?busqueda=', '');
+							
+							GetBusqueda="?busqueda=" + URLsearch;
+							
+							GetbusTag="?Bus=" + URLsearch;
+						
+							}
+								
+							
+								llamarmarc(GetBusqueda);
+								htmlTagsInicial();
+								
+						} 
+						
 
-    <div id='resultados'>
+						function desaparecer(){
+							for(var kon=contproductos-1; kon>=0; kon--){
+								$("#Producto_div_" + kon ).fadeOut(250);
+							}
+						}
+						
+							var randomnum =1;
+						function mostrarProductos(PUESTOS, Titulo,  Descri, ID, ImgUser, ID_Usuario){
+							var div=document.getElementById('mostradorProductos');
+							var indiv = document.createElement('div');
+								indiv.id='Producto_div_' + contproductos;
+								indiv.style.display='none';
+							var texto='<div class=\"imagenProducto\"><img src=\"https://nirjob.com/' + ImgUser + '?'+ randomnum +'\"></div>';
+							texto=texto+'<div class=\"descripcionProducto\"><h3><a href=\"Login/visorServicios.html?ID='+ID+'\">' + Titulo + '</a></h3><p>' + Descri + '</p></div>';
+							texto=texto+'<div class=\"precioProducto\"><h3>$' + PUESTOS + '</h3></div>';
+								div.appendChild(indiv);
+								document.getElementById('Producto_div_' + contproductos).innerHTML=texto;
+								$("#Producto_div_" + contproductos).fadeIn(250);
+								contproductos=contproductos + 1;
+						}	  
+					
+
+						function llamarmarc(busqueda){
+							desaparecer();
+			
+							document.getElementById('mostradorProductos').innerHTML='';
+							contadorProductosBaj=0;
+	contproductosBaj=0;
+								contadorProductosBaj2=0;
+	contproductosBaj2=0;
+							buscheck=busqueda;
+							setTimeout(function(){
+								
+								
+								contproductos=0;
+								document.getElementById('ajax-loader').style.display='block';
+								
+								
+									$.getJSON('https://nirjob.com/archivosbase/php/Buscador100Jq_contratacion/productoscontratacion.php' + busqueda, function(data) {
+								
+									var tamanio=data.length;
+										for(var i=0; i<tamanio; i++){
+											var ID=data[i].ID;
+											var ID_Usuario=data[i].ID_Usuario;
+											var Titulo=data[i].Titulo;
+											var ImgUser=data[i].ImgUser;
+											var PUESTOS=data[i].PUESTOS;
+											var Descri=data[i].Descri;
+											
+										
+										
+										}
+										
+									document.getElementById('ajax-loader').style.display='none';	
+									});
+									
+									
+							}, 250);
+							/*if(iniCargarMas1==0){
+								iniCargarMas1=1;
+							}else{*/
+								cargarMas2();
+					
+							/*}*/
+							
+						}
+							
+					
+						var cont=0;
+						var Ninfowindow=null;
+						
+						
+							
+						function subTag(TAG){
+							document.getElementById('menu_izquierda').style.display='block';
+							
+								$.getJSON('https://nirjob.com/archivosbase/php/Buscador100Jq_contratacion/funciontablaTag.php', function(datat) {
+									
+								var tamaniot=datat.length;
+									for(var i=0; i<tamaniot; i++){
+									var ID=datat[i].ID;
+									
+									
+								
+									}
+							
+								});	
+
+							
+						}
+						function ordenarProductos(e){
+								if(buscheck==''){
+								var busc='?ordenar='+ e.value;
+								buscheck=buscheck + busc;
+								llamarmarc(buscheck);
+								}else{
+									var busc='&ordenar='+ e.value;
+								buscheck=buscheck + busc;
+								llamarmarc(buscheck);
+								}
+						}	  
+						function checkTagSecundario(e, Tag){
+								var check=e.checked;
+								var busc='&tagS%5B%5D='+ e.value;
+								if(check==true){
+								buscheck=buscheck + busc;
+								}else{
+									buscheck=buscheck.replace(busc, '');
+								}
+								
+								llamarmarc(buscheck);
+						}
+						function buscadorTagP(ID){
+							document.getElementById('menu_izquierda').style.display='block';
+							if(buscheck==''){
+								var busc='?tag='+ ID;
+							
+								buscheck=buscheck + busc;
+								llamarmarc(buscheck);
+								
+								}else{
+									var busc='&tag='+ ID;
+								
+								buscheck=buscheck + busc;
+								llamarmarc(buscheck);
+								}
+						} 
+					
+						function htmlTagsInicial(){
+							document.getElementById('ajax-loader').style.display='block';
+							$.get('https://nirjob.com/archivosbase/php/Buscador100Jq_contratacion/funcionhtmlTagsInicial.php'+ GetbusTag, function(texto) {
+						
+								texto="<div id='botondesplegarSubtag' onclick='desplegarSubCategorias();'>Seleccionar Subcategor&iacute;as&nbsp;&nbsp;&#9660;</div>" + texto;
+								document.getElementById('menu_izquierda').innerHTML=texto;
+								document.getElementById('ajax-loader').style.display='none';
+							
+						subTag("0");
+						llamarmarc(buscheck);
+						cambiarColor('', 'T');
+							});	
+							
+						}  
+						
+						function cambiarColor(e, num)
+						{
+							var x = document.getElementsByClassName("logoTag");
+							for (var i = 0; i < x.length; i++) {
+								x[i].style.backgroundColor = "#0288D1";
+							}
+							if(num==0){
+							var y=e.childNodes;
+							y[1].style.backgroundColor = "#FFCA28";
+							}else{
+						
+							}
+
+	}
+	var contadorProductosBaj=0;
+	var contproductosBaj=0;
+	
+
+	var contadorProductosBaj2=0;
+	var contproductosBaj2=0;
+	function ProductosBajoMapa2(NUM){
+
+	 $.getJSON('https://nirjob.com/archivosbase/php/Buscador100Jq_contratacion/productoscontratacion.php' + buscheck, function(data) {
+
+var ini=NUM*8;
+		var tamanio=data.length;
+		if(NUM*8+8<=tamanio){
+		var fin=NUM*8+8;
+		}else{
+		var fin=tamanio;
+		}
+		
+			for(var i=ini; i<fin; i++){
+				var ID=data[i].ID;
+				var ID_Usuario=data[i].ID_Usuario;
+				var Titulo=data[i].Titulo;
+				var ImgUser=data[i].ImgUser;
+				var PUESTOS=data[i].PUESTOS;
+				var Descri=data[i].Descri;
+				var TIPO=data[i].TIPO;
+				var CATEGORIA=data[i].CATEGORIA;
+				if(PUESTOS=='0'){
+					PUESTOS='A convenir';
+				}else{
+					PUESTOS='$' + PUESTOS;
+				}
+				if(TIPO==1){
+					TIPO='Vacante:'
+				}else{
+					TIPO='Servicio:'
+				}
+var div=document.getElementById('mostradorProductos');
+	var indiv = document.createElement('div');
+		indiv.id='Producto_div_' + contproductosBaj2;
+		indiv.className='productosBajoMapa';
+		indiv.style.display='none';
+	var texto='<div class=\"imagenProducto\"><img src=\"https://nirjob.com/' + ImgUser + '?'+ randomnum +'\"></div>';
+	texto=texto+'<div class=\"descripcionProducto\"><h3><a href=\"Login/visorServicios.html?ID='+ID+'\">'+ TIPO + ' ' + Titulo + '</a></h3></div>';
+	texto=texto+'<div class=\"precioProducto\"><h3>' + PUESTOS + '</h3></div>';
+		div.appendChild(indiv);
+		document.getElementById('Producto_div_' + contproductosBaj2).innerHTML=texto;
+		$("#Producto_div_" + contproductosBaj2).fadeIn(250);
+		contproductosBaj2=contproductosBaj2 + 1;
+			}	
+		});
+	}
+		function cargarMas2(){
+			ProductosBajoMapa2(contadorProductosBaj2);
+		contadorProductosBaj2=contadorProductosBaj2+1;
+		}
+	
+		var desplegarSubCategoriasC=0;
+		function desplegarSubCategorias(){
+	
+		if(desplegarSubCategoriasC==0){
+		var el = $('.menuCategorias');
+   var curHeight = el.height();
+   var autoHeight = el.css('height', 'auto').height();
+el.height(curHeight).animate({height: autoHeight}, 800);
+desplegarSubCategoriasC=1;
+}else{
+	var el = $('.menuCategorias');
+   var curHeight = el.height();
+   var autoHeight = '0.05';
+el.height(curHeight).animate({height: autoHeight}, 800);
+desplegarSubCategoriasC=0;
+}
+		}
+					</script>
+<div id="container">
+    <div id="cabecera">
+
+    </div>
+<div id='subHeadID'>
+</div>
+	<div id='contenido'>
+	
+		
+		<div id='contenidoBuscador'>
+			<div class='limpiador'></div>
+			<div id='menu_izquierda'>
+			
+			</div>
+			<div id='botonBuscador'>
+			</div>
+			<div class='limpiador'></div>
+			<div id='productosBuscador' style=''>
+			<div id='productosOrdenar'>
+			<select onchange='ordenarProductos(this)'>
+			<option value='0'>Ordenar</option>
+			<option value='1'>Fecha de publicacion</option>
+			<option value='2'>Precio (Mayor a menor)</option>
+			<option value='3'>Precio (Menor a mayor)</option>
+			</select>
+			</div>
+			<div id='mostradorProductos'>
+			</div><div class='buttonMore'>
+			<button type='button' class='index_button cargarmas' id='cargarMas2' onclick='cargarMas2();'>Cargar Mas</button>
+			</div>
+			<div class='limpiador'></div>
+			</div>
+			
+		<div class='limpiador'></div>
+		</div>
+		
 	</div>
+	<div id='footer'>
+
 	</div>
 	<div id='ajax-loader'>
 	<img src='img/ajax-loader.gif'/>
 	</div>
-	<div id='mensaje_javascript'><div></div></div>
-    <script type="text/javascript" src="cordova.js"></script>
-    <script type="text/javascript" src="js/index.js"></script>
-    <script type="text/javascript">
-        app.initialize();
-    </script>
-	
+</div>					
 </body>
-
 </html>

@@ -1,6 +1,6 @@
  
 body {
-	background: #ffffff;
+	background: #FFFFFF;
 	color: #46485c;
 	font-family: sans-serif;
   }
@@ -22,11 +22,11 @@ body {
   .login {
 	width: 85%;
 	/*width: 22%;*/
-	margin: 2em 7% 0 7%;
-	background: rgba(213,214,217,0.025);
-text-align:center;
+	margin: 2em 0 0 0;
+	background: rgba(0,0,0,0.025);
+	padding: 20px 30px;
 	border-radius: 5px;
-/*	box-shadow: 2px 2px 2px rgba(0,0,0,0.3),inset 0px 1px 0px rgba(255,255,255,0.07)*/
+	box-shadow: 2px 2px 2px rgba(0,0,0,0.3),inset 0px 1px 0px rgba(255,255,255,0.07)
   }
   .selector
   {
@@ -51,26 +51,23 @@ text-align:center;
 	/*outline: none;*/
 	margin-bottom: 5%;
 	color: #46485c;
-	font-size: 0.8em;
+	font-size: 1em;
   }
-  input[type=checkbox] {
-	display: none;
-  }
+
   
   label {
-	display: block;
-	white-space: nowrap;
+	/*display: block;
 	position: relative;
-	/*margin-right: 10px;*/
+	
 	margin-bottom: 10px;
 	width: 5px;
 	height: 5px;
 	border-radius: 50%;
 	background: transparent;
-	/*content: "";*/
+
 	transition: all 0.3s ease-in-out;
 	cursor: pointer;
-	border: 3px solid #46485c;
+	border: 3px solid #46485c;*/
   }
   .textLabel{
 		margin-top: -4px;
@@ -85,17 +82,18 @@ text-align:center;
   }
   
   input[type="submit"] {
-	background: #2A43FA;
+	background: #4FC3F7;
 	border: 0;
 	width: 95%;
 	height: 3em;
+	margin:0.5em 0.5%;
 	border-radius: 3px;
 	color: white;
 	cursor: pointer;
 	transition: background 0.3s ease-in-out;
   }
   input[type="submit"]:hover {
-	background: #2A43FA;
+	background: #03A9F4;
   }
   
   .forgot {
@@ -166,7 +164,7 @@ select option:hover {
 	overflow: hidden;
 	width: 80%;
 	position:relative;
-	box-shadow: 2px 2px 2px rgba(0,0,0,0.3),inset 1px 1px 1px rgba(255,255,255,0.07);
+	box-shadow: 2px 2px 2px rgba(0,0,0,0.3),inset 0px 1px 0px rgba(255,255,255,0.07);
 }
 input:focus { 
 		/*background-color: yellow;*/
@@ -186,16 +184,5 @@ input:focus {
 	top:0;
 	right:0px;	
 	pointer-events: none;
-}
-#logo{
-background: url(../img/OwlLogo1.png) no-repeat center top;
-    position: relative;
-    /* left: 25%; */
-    /* top: 130px; */
-    height: 190px;
-    width: 100%;
-    text-align: center;
-    /* padding: 180px 0px 0px 0px; */
-    /* margin: -115px 0px 0px -112px; */
 }
   

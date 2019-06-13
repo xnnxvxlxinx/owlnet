@@ -59,6 +59,7 @@ text-align:center;
   
   label {
 	display: block;
+	white-space: nowrap;
 	position: relative;
 	/*margin-right: 10px;*/
 	margin-bottom: 10px;
@@ -187,14 +188,14 @@ input:focus {
 	pointer-events: none;
 }
 #logo{
-background:url(../img/OwlLogo1.png) no-repeat center top; /* 170px x 200px */
-   position: relative;
-    left: 50%;
-    top: 130px;
-    height: 135px;                  /* text area height */
-    width:225px;                   /* text area width */
-    text-align:center;
-    padding:180px 0px 0px 0px;     /* image height is 200px (bottom 20px are overlapped with text) */
-    margin:-115px 0px 0px -112px;  /* offset vertical: half of image height and text area height */
+background: url(../img/OwlLogo1.png) no-repeat center top;
+    position: relative;
+    /* left: 25%; */
+    /* top: 130px; */
+    height: 190px;
+    width: 100%;
+    text-align: center;
+    /* padding: 180px 0px 0px 0px; */
+    /* margin: -115px 0px 0px -112px; */
 }
   

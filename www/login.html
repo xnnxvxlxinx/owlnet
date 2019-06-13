@@ -16,7 +16,9 @@
 	var urlM=obtenerURL();
 	//var urlM='owndafa.cisjsada';
 	function initialize() {
-	
+	if(localStorage.getItem("SesionLoggedin")=='true'){
+	location.href="principal.html";
+	}
 		}
 $(function(){
         $("#formuInicio").on("submit", function(e){
@@ -51,7 +53,7 @@ $(function(){
 				localStorage.setItem("SesionTelefono", SesionTelefono);
 				localStorage.setItem("SesionLoggedin", SesionLoggedin);
 				localStorage.setItem("SesionUsuario", SesionUsuario);
-				location.href="../principal.html";
+				location.href="principal.html";
 				$("#ErrorInicio").html("");
 				}else{
 				if(data[0].SesionError=='1'){
@@ -97,7 +99,7 @@ $("#" + div).fadeOut(150);
 <div id='ErrorInicio'></div>
     <div class="login">
 <form method="post" id='formuInicio' name="f1">	
-<label for="username"><div class="textLabel">Usuario</div></label>
+<label for="username"><div class="textLabel">N&uacute;mero &Uacute;nico</div></label>
 <input type="text" name="username" id="username" required placeholder="">
 <br/>
 <label for="userPwd"><div class="textLabel">Contrase&ntilde;a</div></label>
