@@ -106,25 +106,28 @@ $(function(){
         $("#FotoPerfil").on("submit", function(e){
 			
             e.preventDefault();
-		
+		document.getElementById('ajax-loader').style.display='block';
 
 				var UID = localStorage.getItem('SesionID') || '<empty>';
 				var Usuario = localStorage.getItem('SesionUsuario') || '<empty>';
 				if(UriImagnes!=''){
+				
 var win = function(r) {
+document.getElementById('ajax-loader').style.display='none';
    var mensaje=document.getElementById('mensaje_javascript');
 		mensaje.style.display='block';
 var texto="<p>Se ha subido su imagen con exito.</p>";
-texto= texto + "<button type='button' onclick='location.href=\"../index.html\"; cerrar(\"mensaje_javascript\");'>Continuar</button>";
+texto= texto + "<button type='button' onclick='location.href=\"index.html\"; cerrar(\"mensaje_javascript\");'>Continuar</button>";
 //texto= texto + "<button type='button' onclick='cerrar(\"mensaje_javascript\")'>Regresar</button>";
 		mensaje.childNodes[0].innerHTML=texto;
 }
 
 var fail = function(error) {
+document.getElementById('ajax-loader').style.display='none';
 var mensaje=document.getElementById('mensaje_javascript');
 		mensaje.style.display='block';
 var texto="<p>Error al enviar su imagen.</p>";
-texto= texto + "<button type='button' onclick='location.href=\"../index.html\"; cerrar(\"mensaje_javascript\");'>Salir</button>";
+texto= texto + "<button type='button' onclick='location.href=\"index.html\"; cerrar(\"mensaje_javascript\");'>Salir</button>";
 texto= texto + "<button type='button' onclick='cerrar(\"mensaje_javascript\")'>Volver a intentar</button>";
 		mensaje.childNodes[0].innerHTML=texto;
 }	
@@ -141,6 +144,7 @@ var ft = new FileTransfer();
 
 ft.upload(UriImagnes, encodeURI(urlM + "/app/SubirFotoPerfil.php"), win, fail, options);
 }else{
+document.getElementById('ajax-loader').style.display='none';
 var mensaje=document.getElementById('mensaje_javascript');
 		mensaje.style.display='block';
 var texto="<p>No se ha seleccionado una imagen para subir.</p>";

@@ -25,19 +25,27 @@ var URLdomain = window.location.host;
 var protocolo = window.location.protocol;
 var pathname = window.location.pathname;
 //var url=  "file:///android_asset/www/" ;
-var url="";
+var url= "";
 //var url=protocolo + "//" + URLdomain +"/";
 var resolucionheight=screen.height;
-var resolucionheight10=resolucionheight*0.10;
+//var resolucionheight10=resolucionheight*0.10;
+var resolucionheight10="4";
 var Usuario = localStorage.getItem('SesionUsuario') || '<empty>';
 var SesionID = localStorage.getItem('SesionID') || '<empty>';
-document.getElementById('cabeza').style.height=resolucionheight10+'px';
+/*document.getElementById('cabeza').style.height=resolucionheight10+'px';
 document.getElementById('logo').style.height=resolucionheight10+'px';
 document.getElementById('logoMain').style.height=resolucionheight10+'px';
 document.getElementById('MenuHamburgueza').style.height=resolucionheight10+'px';
 document.getElementById('MenuCabeza').style.height=resolucionheight*0.9+'px';
 document.getElementById('MenuCabezaC').style.height=resolucionheight+'px';
-document.getElementById('MenuCabeza').style.top=resolucionheight10+'px';
+document.getElementById('MenuCabeza').style.top=resolucionheight10+'px';*/
+document.getElementById('cabeza').style.height=resolucionheight10+'em';
+document.getElementById('logo').style.height=resolucionheight10+'em';
+document.getElementById('logoMain').style.height=resolucionheight10+'em';
+document.getElementById('MenuHamburgueza').style.height=resolucionheight10+'em';
+document.getElementById('MenuCabeza').style.height=resolucionheight*0.9+'em';
+document.getElementById('MenuCabezaC').style.height=resolucionheight+'em';
+document.getElementById('MenuCabeza').style.top=resolucionheight10+'em';
 
 $(function(){
         $("#buscadorformcabeza").on("submit", function(e){
@@ -61,7 +69,7 @@ location.href=url + "principal.html?busqueda=" + URLsearch;
   		.fail(function() {
 		var mensaje=document.getElementById('mensaje_javascript');
 		mensaje.style.display='block';
-var texto="<p>Su dispositivo no esta conectado al Internet.</br>¿Decea intentar conectar de nuevo?</p>";
+var texto="<p>Su dispositivo no esta conectado al Internet.</br>¿Desea intentar conectar de nuevo?</p>";
 texto= texto + "<button type='button' onclick='window.location.reload(true);'>Si</button>";
 texto= texto + "<button type='button' onclick='cerrarMensaje(\"mensaje_javascript\");'>No</button>";
 		mensaje.childNodes[0].innerHTML=texto;
