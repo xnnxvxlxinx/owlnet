@@ -12,7 +12,7 @@
 	<link rel="stylesheet" type="text/css" href="css/fotosseleccion.css">
 	<link rel="stylesheet" type="text/css" href="css/ajax-loader.css">
 	<link rel="stylesheet" type="text/css" href="css/mensaje_javascript.css">
-	<script src="js/jquerymobile/jquery-3.2.1.min.js"></script>
+<script src="js/jquerymobile/jquery-3.2.1.min.js"></script>
  <script src="js/jquerymobile/jquery.mobile-1.4.5.min.js"></script>
  <script type="text/javascript" src="cordova.js"></script>
    <script type="text/javascript"  src="js/phonegap.js"></script>
@@ -98,7 +98,7 @@ var div=document.getElementById('seleccionadorTituloC');
 		 texto= texto + '<h3>Descripci&oacute;n de la Publicaci&oacute;n.</h3><input type="text" id="InputDescripcion" value="' + InputDescripcion +'" /></br>';
 		 texto= texto + '<h3>*Precio $:</h3><input type="number" id="InputPrecio" value="' + InputPrecio +'" /></br>';
 		 texto= texto + '<h3>*Plazo:</h3><input type="number" id="InputPlazo" value="' + InputPlazo +'" />D&iacute;as</br>';
-		 texto=texto +'<input type="submit" value="Siguiente" onclick="seleccionadorTagsSecundario();" style="background-color: #FFD54F;"></div>';
+		 texto=texto +'<input type="submit" value="Siguiente" onclick="seleccionadorTagsSecundario();" style="background-color: #4FC3F7;"></div>';
 		
 		div.innerHTML=texto;
 }
@@ -274,7 +274,7 @@ texto= texto + '<h3>Plazo [Dias]:</h3><input name="plazo1" type="text"  required
 		var UID = localStorage.getItem('SesionID') || '<empty>';
 		texto= texto + '<input type="text" name="UID" required readonly value="' +  UID +'" style="display:none"/>';
 		 texto= texto + '<input type="text" required readonly name="subir_nuevo_oferta_E" value="Subir" style="display:none"/></br>';
-		 texto=texto +'<input type="submit"   value="Finalizar" style="background-color: #FFD54F;"/>';
+		 texto=texto +'<input type="submit"   value="Finalizar" style="background-color: #4FC3F7;"/>';
 		 texto=texto +'</div>';
 		div.innerHTML=texto;
 }
@@ -298,6 +298,7 @@ $(function(){
                 contentType: false,
 	     processData: false
             }).done(function(data){
+			
 				var tamanio=data.length;
 				alert('Error: ' + data[0].Error);
 				if(data[0].Error=='0' && tamanio==1){
@@ -372,30 +373,30 @@ texto= texto + "<button type='button' onclick='cerrar(\"mensaje_javascript\")'>R
 		<div class='limpiador'></div>
 		<div id='seleccionadorTitulo' style='display:none'>
 		<div id='seleccionadorTituloBRegresar' >
-		<input type="submit" value="Regresar" onclick='regresar(1);' style="background-color: #FFD54F;">
+		<input type="submit" value="Regresar" onclick='regresar(1);' style="background-color: #4FC3F7;">
 		</div>
 		<div id='seleccionadorTituloC' >
 		</div>
 		</div>
 		<div id='seleccionadorTagsSecundario' style='display:none'>
 		<div id='seleccionadorTagsSecundarioBRegresar' >
-		<input type="submit" value="Regresar" onclick='regresar(2);' style="background-color: #FFD54F;">
+		<input type="submit" value="Regresar" onclick='regresar(2);' style="background-color: #4FC3F7;">
 		</div>
 		<div id='seleccionadorTagsSecundarioC' >
 		</div>
 		</div>
 		<div id='seleccionadorImagenes' style='display:none'>
 		<div id='seleccionadorImagenesBRegresar' >
-		<input type="submit" value="Regresar" onclick='regresar(3);' style="background-color: #FFD54F;"></br>
-		<input type="submit" value="Nueva Imagen" onclick='ObtenerImagenes();' style="background-color: #FFD54F;">
+		<input type="submit" value="Regresar" onclick='regresar(3);' style="background-color: #4FC3F7;"></br>
+		<input type="submit" value="Nueva Imagen" onclick='ObtenerImagenes();' style="background-color: #4FC3F7;">
 		</div>
 		<div id='seleccionadorImagenesC' >
 		</div>
-		<input type="submit" value="Siguiente" onclick='SubirDatos();' style="background-color: #FFD54F;">
+		<input type="submit" value="Siguiente" onclick='SubirDatos();' style="background-color: #4FC3F7;">
 		</div>
 		<div id='seleccionadorSubirDatos' style='display:none'>
 		<div id='seleccionadorSubirDatosBRegresar' >
-		<input type="submit" value="Regresar" onclick='regresar(4);' style="background-color: #FFD54F;">
+		<input type="submit" value="Regresar" onclick='regresar(4);' style="background-color: #4FC3F7;">
 		</div>
 		<form id="formServicio" method="post" enctype="multipart/form-data">
 		<div id='SubirDatosC' >

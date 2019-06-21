@@ -86,7 +86,7 @@ h2{
     height: 1.4em;
     border: none;
     border-radius: 3px;
-    background: #FFD54F;
+    background: #4FC3F7;
    /* position: absolute;
     bottom: 0;
     right: 0;*/
@@ -189,7 +189,7 @@ label{
     padding-right: 5%;
     /*margin-right: 3%;*/
     /*color: #003818;*/
-    background-color: #FFD54F;
+    background-color: #4FC3F7;
     color: #FFFFFF;
     font-weight: bold;
     margin-left: 8%;
@@ -411,7 +411,7 @@ transform: rotate(180deg);
     margin-top: 0.1em;
     border: none;
     border-radius: 3px;
-    background: #FFD54F;
+    background: #4FC3F7;
     margin-left: 4%;
     /*margin-right: 8%;*/
     
@@ -429,7 +429,7 @@ transform: rotate(180deg);
 }
 
 .index_button{
-    background: #FFD54F;
+    background: #4FC3F7;
 	border: 0;
 	width: 40%;
 	height: 3em;

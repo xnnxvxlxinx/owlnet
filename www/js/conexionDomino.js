@@ -1,6 +1,6 @@
 
 function obtenerURL(){
-	var url='http://2ed1311c.ngrok.io';
-	//var url='http://localhost';
+	//var url='http://c548e7e9.ngrok.io';
+	var url='http://localhost';
 	return url;
 }

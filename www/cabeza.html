@@ -1,10 +1,10 @@
  <script src="js/conexionDomino.js"></script>
 <div id="cabeza">
-    <div id="logo"><div id="logoMain"></div></div>
+    <div id="logo" onclick='irIni();'><div id="logoMain"></div></div>
 	
 	<div id="busqueda">
 	<form id='buscadorformcabeza' method='get'>
-	<input type="text"  class="search_bar" id="search_bar_cabeza" placeholder="Busqueda" required />
+	<input type="text"  class="search_bar" id="search_bar_cabeza" placeholder="Busqueda"  />
 	<input type='submit' class='search_button' id='search_buttonB'  value='' />
 	</form>
 	</div>
@@ -59,6 +59,9 @@ URLsearch=encodeURIComponent(URLsearch);
 
 location.href=url + "principal.html?busqueda=" + URLsearch;
 //}
+}
+function irIni(){
+location.href=url + "principal.html";
 }
 	function checkConnection() {
     	$.ajax({
