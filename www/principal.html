@@ -184,18 +184,23 @@ var div=document.getElementById('mostradorProductos');
 		indiv.className='productosBajoMapa';
 		indiv.style.display='none';
 	var texto='<div class=\"imagenProducto\"><img src=\"' + urlM + '/' + ImgUser + '?'+ randomnum +'\"></div>';
-//if((plazo*24*3600)+tiempo>tiempoAct){
+	var quedaD=parseInt((tiempoAct-(plazo*24*3600)-tiempo)/(3600*24));
+	var quedaH=parseInt((-quedaD*3600*24+(tiempoAct-(plazo*24*3600)-tiempo))/(3600));
+	var quedaM=parseInt((-quedaD*3600*24-quedaH*3600+(tiempoAct-(plazo*24*3600)-tiempo))/(60));
+	quedaD=quedaD*(-1);
+	quedaH=quedaH*(-1);
+	quedaM=quedaM*(-1);
+if((plazo*24*3600)+tiempo>tiempoAct){
 plazo2=''
 	texto=texto+'<div class=\"descripcionProducto\"><h3><a href=\"proyectos.html?ID='+ID+'\">'+ plazo2 + ' ' + Titulo + '</a></h3></div>';
-/*}else{
+		texto=texto+'<div class=\"plazoProducto\"><h3>Quedan:' + quedaD + 'Dias, '+quedaH+'Horas, '+quedaM+'Min<br/></h3></div>';
+}else{
 					plazo2='Expirado:'
 					texto=texto+'<div class=\"descripcionProducto\"><h3>'+ plazo2 + ' ' + Titulo + '</h3></div>';
-					
-				}*/
-				var quedaD=parseInt((tiempoAct-(plazo*24*3600)+tiempo)/(3600*24));
-				var quedaH=parseInt((quedaD*3600*24-(tiempoAct-(plazo*24*3600)+tiempo))/(3600));
-				var quedaM=parseInt((quedaD*3600*24+quedaH*3600-(tiempoAct-(plazo*24*3600)+tiempo))/(60));
-	texto=texto+'<div class=\"plazoProducto\"><h3>Quedan:' + quedaD + 'Dias, '+quedaH+'Horas, '+quedaM+'Min<br/></h3></div>';			
+						texto=texto+'<div class=\"plazoProducto\"><h3></h3></div>';
+				}
+				
+			
 	texto=texto+'<div class=\"precioProducto\"><h3>' + precio + '</h3></div>';
 		div.appendChild(indiv);
 		document.getElementById('Producto_div_' + contador_proyDes).innerHTML=texto;
