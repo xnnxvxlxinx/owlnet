@@ -111,8 +111,9 @@ $(function(){
 				var UID = localStorage.getItem('SesionID') || '<empty>';
 				var Usuario = localStorage.getItem('SesionUsuario') || '<empty>';
 				if(UriImagnes!=''){
-				document.getElementById('ajax-loader').style.display='none';
+				
 var win = function(r) {
+document.getElementById('ajax-loader').style.display='none';
    var mensaje=document.getElementById('mensaje_javascript');
 		mensaje.style.display='block';
 var texto="<p>Se ha subido su imagen con exito.</p>";
@@ -122,6 +123,7 @@ texto= texto + "<button type='button' onclick='location.href=\"index.html\"; cer
 }
 
 var fail = function(error) {
+document.getElementById('ajax-loader').style.display='none';
 var mensaje=document.getElementById('mensaje_javascript');
 		mensaje.style.display='block';
 var texto="<p>Error al enviar su imagen.</p>";
@@ -142,6 +144,7 @@ var ft = new FileTransfer();
 
 ft.upload(UriImagnes, encodeURI(urlM + "/app/SubirFotoPerfil.php"), win, fail, options);
 }else{
+document.getElementById('ajax-loader').style.display='none';
 var mensaje=document.getElementById('mensaje_javascript');
 		mensaje.style.display='block';
 var texto="<p>No se ha seleccionado una imagen para subir.</p>";

@@ -12,16 +12,18 @@
 	<link rel="stylesheet" type="text/css" href="css/fotosseleccion.css">
 	<link rel="stylesheet" type="text/css" href="css/ajax-loader.css">
 	<link rel="stylesheet" type="text/css" href="css/mensaje_javascript.css">
-	<script src="js/jquerymobile/jquery-3.2.1.min.js"></script>
+<script src="js/jquerymobile/jquery-3.2.1.min.js"></script>
  <script src="js/jquerymobile/jquery.mobile-1.4.5.min.js"></script>
  <script type="text/javascript" src="cordova.js"></script>
    <script type="text/javascript"  src="js/phonegap.js"></script>
+    <script src="js/conexionDomino.js"></script>
 	<script>
 	   var pictureSource;   // picture source
     var destinationType; // sets the format of returned value 
  document.addEventListener("deviceready",onDeviceReady,false);
     // PhoneGap is ready to be used!
     //
+	var urlM=obtenerURL();
     function onDeviceReady() {
 	
         pictureSource=navigator.camera.PictureSourceType;
@@ -31,6 +33,7 @@
 	var TagPrinciForm=0;
 	var InputTitulo='';
 var InputDescripcion='';
+var InputRequisitos='';
 var InputTagSecundario=[];
 var UriImagnes=[];
 var TotalImagenes=0;
@@ -59,10 +62,12 @@ setTimeout(function(){
 	TagPrinciForm=0;
 	 InputTitulo='';
  InputDescripcion='';
+ InputRequisitos='';
  InputPrecio=0;
+  InputPlazo=0;
  UriImagnes=[];
  InputTagSecundario=[];
-	   $.getJSON('https://nirjob.com/PhoneGap/servicios/TagPrincipales.php', function(data) {  
+	   $.getJSON(urlM + '/app/TagPrincipales.php', function(data) {  
   
 		var tamanio=data.length;
 			for(var i=0; i<tamanio; i++){
@@ -76,28 +81,11 @@ setTimeout(function(){
 
 		}, 150);
 } 
-function ObtenerTagSecundario(ID){
-document.getElementById('ajax-loader').style.display='block';
-setTimeout(function(){
-	   $.getJSON('https://nirjob.com/PhoneGap/servicios/TagSecundarios.php' + '?ID=' + ID, function(data) {  
-	var texto='<div><h3>Sub Categor&iacute;as.</h3>';
-		var tamanio=data.length;
-			for(var i=0; i<tamanio; i++){
-				var ID=data[i].ID;
-				var Nombre=data[i].Nombre;
-				texto=texto + "<label>"+ Nombre +": <input type='radio' name='radiosubtagNoT' value='"+ ID +"' class='InputTagSecundario'/></label><br/><br/><br/>";
-			}
-			texto=texto + "<input type='submit' value='Siguiente' onclick='seleccionadorImagenes();' style='background-color: #FFD54F;'></div>";
-		document.getElementById('seleccionadorTagsSecundarioC').innerHTML=texto;
-		document.getElementById('ajax-loader').style.display='none';	
-		});	
-		}, 150);
-}
 function mostrarTags(ID, Nombre, Imagen){
 var div=document.getElementById('seleccionadorTags');
 var indiv = document.createElement('div');
 		indiv.id='seleccionadorTags_' + numeroTagsPrin;
-		var texto='<div  onclick="seleccionadorTitulo(\''+ ID +'\')"><img src="https://nirjob.com/'+ Imagen +'?'+ randomnum +'" style="background-color:#1c8ee6;border-radius: 20px;"/>';
+		var texto='<div  onclick="seleccionadorTitulo(\''+ ID +'\')"><img src="'+ urlM +''+ Imagen +'?'+ randomnum +'" style="background-color:#1c8ee6;border-radius: 20px;"/>';
 		 texto= texto + '<h3>'+ Nombre +'</h3></div>';
 		div.appendChild(indiv);
 		document.getElementById('seleccionadorTags_' + numeroTagsPrin).innerHTML=texto;
@@ -109,9 +97,11 @@ function mostrarTitulo(){
 var div=document.getElementById('seleccionadorTituloC');
 
 		var texto='<div ><h3>T&iacute;tulo de la Publicaci&oacute;n.</h3><input type="text" id="InputTitulo" value="'+ InputTitulo +'" /></br>';
-		 texto= texto + '<h3>Descripci&oacute;n de la Publicaci&oacute;n.</h3><input type="text" id="InputDescripcion" value="' + InputDescripcion +'" /></br>';
+		 texto= texto + '<h3>Descripci&oacute;n de la Publicaci&oacute;n.</h3><textarea type="text" id="InputDescripcion">' + InputDescripcion +'</textarea></br>';
+		 texto= texto + '<h3>Requisitos para el proyecto.</h3><textarea type="text" id="InputRequisitos">' + InputRequisitos +'</textarea></br>';
 		 texto= texto + '<h3>*Precio $:</h3><input type="number" id="InputPrecio" value="' + InputPrecio +'" /></br>';
-		 texto=texto +'<input type="submit" value="Siguiente" onclick="seleccionadorTagsSecundario();" style="background-color: #FFD54F;"></div>';
+		 texto= texto + '<h3>*Plazo:</h3><input type="number" id="InputPlazo" value="' + InputPlazo +'" />D&iacute;as</br>';
+		 texto=texto +'<input type="submit" value="Siguiente" onclick="seleccionadorTagsSecundario();" style="background-color: #4FC3F7;"></div>';
 		
 		div.innerHTML=texto;
 }
@@ -175,35 +165,28 @@ texto= texto + "<button type='button' onclick='cerrar(\"mensaje_javascript\")'>A
 function seleccionadorTagsSecundario(){
 InputTitulo=document.getElementById('InputTitulo').value;
 InputDescripcion=document.getElementById('InputDescripcion').value;
+InputRequisitos=document.getElementById('InputRequisitos').value;
 InputPrecio=document.getElementById('InputPrecio').value;
-if(InputTitulo!='' && InputDescripcion!='' && InputPrecio!='' && InputPrecio>=0){
+InputPlazo=document.getElementById('InputPlazo').value;
+if(InputTitulo!='' && InputDescripcion!='' && InputRequisitos!='' && InputPrecio!='' && InputPrecio>=0 && InputPlazo>0 && InputPlazo!=''){
 $("#seleccionadorTitulo").fadeOut(250);
 document.getElementById('ajax-loader').style.display='block';
 setTimeout(function(){
-
-document.getElementById('seleccionadorTagsSecundarioC').innerHTML='';
-ObtenerTagSecundario(TagPrinciForm);
+seleccionadorImagenes();
+//document.getElementById('seleccionadorTagsSecundarioC').innerHTML='';
 document.getElementById('ajax-loader').style.display='none';	
-$("#seleccionadorTagsSecundario").fadeIn(250);
+//$("#seleccionadorTagsSecundario").fadeIn(250);
 }, 255);
 }else{
 var mensaje=document.getElementById('mensaje_javascript');
 		mensaje.style.display='block';
-var texto="<p>La publicaci&oacute;n debe tener un t&iacute;tulo, una descripci&oacute;n y un precio.<br/>(* Precio=0, A Convenir)</p>";
+var texto="<p>La publicaci&oacute;n debe tener un t&iacute;tulo, una descripci&oacute;n, requisitos, un precio y un plazo.<br/>(* Precio=0, A Convenir)</p>";
 texto= texto + "<button type='button' onclick='cerrar(\"mensaje_javascript\")'>Aceptar</button>";
 		mensaje.childNodes[0].innerHTML=texto;
 }
 }
 function seleccionadorImagenes(){
-var C=document.getElementsByClassName('InputTagSecundario');
-var aux=0;
-for(var i=0; i<C.length; i++){
-if(C[i].checked==true){
-InputTagSecundario[aux]=C[i].value;
-aux=aux+1;
-}
-}
-if(aux!=0){
+
 $("#seleccionadorTagsSecundario").fadeOut(250);
 document.getElementById('ajax-loader').style.display='block';
 setTimeout(function(){
@@ -211,14 +194,7 @@ document.getElementById('seleccionadorImagenesC').innerHTML='';
 ObtenerImagenes();
 document.getElementById('ajax-loader').style.display='none';	
 $("#seleccionadorImagenes").fadeIn(250);
-}, 255); }else{
-var mensaje=document.getElementById('mensaje_javascript');
-		mensaje.style.display='block';
-var texto="<p>No ha seleccionado ninguna sub categor&iacute;a.</p>";
-//texto= texto + "<button type='button' onclick='seleccionadorImagenes(); cerrar(\"mensaje_javascript\");'>Siguiente</button>";
-texto= texto + "<button type='button' onclick='cerrar(\"mensaje_javascript\");'>Regresar</button>";
-		mensaje.childNodes[0].innerHTML=texto;
-}
+}, 255);
 }
 function seleccionadorTitulo(ID){
 
@@ -292,21 +268,19 @@ function subirdatosservicio(){
 var div=document.getElementById('SubirDatosC');
 var texto='<div>';
 		var texto='<h3>T&iacute;tulo de la Publicaci&oacute;n.</h3><input type="text" name="titulo" value="'+ InputTitulo +'" required readonly/></br>';
-		 texto= texto + '<h3>Descripci&oacute;n de la Publicaci&oacute;n.</h3><input name="descripcion" type="text" required readonly value="' + InputDescripcion +'" /></br>';
-texto= texto + '<h3>Valor $:</h3><input name="puestos" type="text"  required readonly value="' + InputPrecio +'" /></br>';		 
+		 texto= texto + '<h3>Descripci&oacute;n de la Publicaci&oacute;n.</h3><textarea name="descripcion" type="text" required readonly>' + InputDescripcion +'</textarea></br>';
+		 	 texto= texto + '<h3>Requisitos para el proyecto.</h3><textarea type="text" name="Requisitos" required readonly>' + InputRequisitos +'</textarea></br>';
+texto= texto + '<h3>Valor $:</h3><input name="puestos" type="text"  required readonly value="' + InputPrecio +'" /></br>';	
+texto= texto + '<h3>Plazo [Dias]:</h3><input name="plazo1" type="text"  required readonly value="' + InputPlazo +'" /></br>';		 
 		 texto= texto + '<input type="text" name="tag_principal" required readonly value="' +  TagPrinciForm +'" style="display:none"/></br>';
-		for(var i=0; i<InputTagSecundario.length; i++){
-		 texto= texto + '<input type="text" name="subtag[]" required readonly value="' +  InputTagSecundario[i] +'" style="display:none"/></br>';
-		}
 		for(var i=0; i<UriImagnes.length; i++){
 		 texto= texto + '<h3>Imagen: </h3><div class="seleccionadorImagenesC_foto"><img src="'+ UriImagnes[i] +'" style="width:100%; height:10em;"/></div></br>';
 		}
 		var UID = localStorage.getItem('SesionID') || '<empty>';
 		texto= texto + '<input type="text" name="UID" required readonly value="' +  UID +'" style="display:none"/>';
-		texto= texto + '<input type="text" name="tipo" required readonly value="2" style="display:none"/>';
 		 texto= texto + '<input type="text" required readonly name="subir_nuevo_oferta_E" value="Subir" style="display:none"/></br>';
-		 texto=texto +'<input type="submit"   value="Finalizar" style="background-color: #FFD54F;"/>';
-		 texto=texto +'</form></div>';
+		 texto=texto +'<input type="submit"   value="Finalizar" style="background-color: #4FC3F7;"/>';
+		 texto=texto +'</div>';
 		div.innerHTML=texto;
 }
 
@@ -321,7 +295,7 @@ $(function(){
 			document.getElementById('ajax-loader').style.display='block';
 			setTimeout(function(){
             $.ajax({
-                url: "App/subirServicio.php",
+                url: urlM + "/app/subirServicio.php",
                 type: "post",
                 dataType: "json",
                 data: formData,
@@ -329,13 +303,14 @@ $(function(){
                 contentType: false,
 	     processData: false
             }).done(function(data){
+			
 				var tamanio=data.length;
-				alert('Error: ' + data[0].Error);
+				//alert('Error: ' + data[0].Error);
 				if(data[0].Error=='0' && tamanio==1){
 				var UID = localStorage.getItem('SesionID') || '<empty>';
 	if(UriImagnes.length>0){
 	for(var i=0; i<UriImagnes.length; i++){
-alert('entro: ' + i);
+//alert('entro: ' + i);
 var win = function(r) {
    var mensaje=document.getElementById('mensaje_javascript');
 		mensaje.style.display='block';
@@ -348,12 +323,12 @@ texto= texto + "<button type='button' onclick='location.href=\"index.html\"; cer
 var fail = function(error) {
 var mensaje=document.getElementById('mensaje_javascript');
 		mensaje.style.display='block';
-var texto="<p>Error al enviar su pedido de proyecto.</p>";
+var texto="<p>Error al enviar su proyecto.</p>";
 texto= texto + "<button type='button' onclick='location.href=\"index.html\"; cerrar(\"mensaje_javascript\");'>Salir</button>";
 texto= texto + "<button type='button' onclick='cerrar(\"mensaje_javascript\")'>Volvar a intentar</button>";
 		mensaje.childNodes[0].innerHTML=texto;
 }
-alert('Var');	
+//alert('Var');	
 var options = new FileUploadOptions();
 options.fileKey = "file";
 options.fileName = UriImagnes[i].substr(UriImagnes[i].lastIndexOf('/') + 1);
@@ -365,18 +340,18 @@ params.UID=UID;
 options.params = params;
 var ft = new FileTransfer();
 
-ft.upload(UriImagnes[i], encodeURI("/servicios/imagenesSubir.php"), win, fail, options);
+ft.upload(UriImagnes[i], encodeURI(urlM + "/app/imagenesSubir.php"), win, fail, options);
 }}else{
 var mensaje=document.getElementById('mensaje_javascript');
 		mensaje.style.display='block';
-var texto="<p>Se ha publicado su servicio con &eacute;xito.</p>";
+var texto="<p>Se ha publicado su proyecto con &eacute;xito.</p>";
 texto= texto + "<button type='button' onclick='location.href=\"../index.html\"; cerrar(\"mensaje_javascript\");'>Continuar</button>";
 //texto= texto + "<button type='button' onclick='cerrar(\"mensaje_javascript\")'>Regresar</button>";
 		mensaje.childNodes[0].innerHTML=texto;
 }			}else{
 			var mensaje=document.getElementById('mensaje_javascript');
 		mensaje.style.display='block';
-var texto="<p>Error al subir la oferta de servicio.</p>";
+var texto="<p>Error al subir el proyecto.</p>";
 texto= texto + "<button type='button' onclick='cerrar(\"mensaje_javascript\")'>Regresar</button>";
 		mensaje.childNodes[0].innerHTML=texto;
 				}
@@ -403,30 +378,30 @@ texto= texto + "<button type='button' onclick='cerrar(\"mensaje_javascript\")'>R
 		<div class='limpiador'></div>
 		<div id='seleccionadorTitulo' style='display:none'>
 		<div id='seleccionadorTituloBRegresar' >
-		<input type="submit" value="Regresar" onclick='regresar(1);' style="background-color: #FFD54F;">
+		<input type="submit" value="Regresar" onclick='regresar(1);' style="background-color: #4FC3F7;">
 		</div>
 		<div id='seleccionadorTituloC' >
 		</div>
 		</div>
 		<div id='seleccionadorTagsSecundario' style='display:none'>
 		<div id='seleccionadorTagsSecundarioBRegresar' >
-		<input type="submit" value="Regresar" onclick='regresar(2);' style="background-color: #FFD54F;">
+		<input type="submit" value="Regresar" onclick='regresar(2);' style="background-color: #4FC3F7;">
 		</div>
 		<div id='seleccionadorTagsSecundarioC' >
 		</div>
 		</div>
 		<div id='seleccionadorImagenes' style='display:none'>
 		<div id='seleccionadorImagenesBRegresar' >
-		<input type="submit" value="Regresar" onclick='regresar(3);' style="background-color: #FFD54F;"></br>
-		<input type="submit" value="Nueva Imagen" onclick='ObtenerImagenes();' style="background-color: #FFD54F;">
+		<input type="submit" value="Regresar" onclick='regresar(3);' style="background-color: #4FC3F7;"></br>
+		<input type="submit" value="Nueva Imagen" onclick='ObtenerImagenes();' style="background-color: #4FC3F7;">
 		</div>
 		<div id='seleccionadorImagenesC' >
 		</div>
-		<input type="submit" value="Siguiente" onclick='SubirDatos();' style="background-color: #FFD54F;">
+		<input type="submit" value="Siguiente" onclick='SubirDatos();' style="background-color: #4FC3F7;">
 		</div>
 		<div id='seleccionadorSubirDatos' style='display:none'>
 		<div id='seleccionadorSubirDatosBRegresar' >
-		<input type="submit" value="Regresar" onclick='regresar(4);' style="background-color: #FFD54F;">
+		<input type="submit" value="Regresar" onclick='regresar(4);' style="background-color: #4FC3F7;">
 		</div>
 		<form id="formServicio" method="post" enctype="multipart/form-data">
 		<div id='SubirDatosC' >

@@ -188,7 +188,7 @@ input:focus {
 	pointer-events: none;
 }
 #logo{
-background: url(../img/OwlLogo1.png) no-repeat center top;
+background: url(../img/logo.png) no-repeat center top;
     position: relative;
     /* left: 25%; */
     /* top: 130px; */

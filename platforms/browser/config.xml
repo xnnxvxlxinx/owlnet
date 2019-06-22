@@ -8,10 +8,10 @@
     </feature>
     <name>OWLNET</name>
     <description>
-        Hello World sample application that responds to the deviceready event.
+        Owlnet App
     </description>
-    <author email="support@phonegap.com" href="http://phonegap.com">
-        PhoneGap Team
+    <author email="mateo@phonegap.com" href="http://owlnet.com">
+      Mateo Moscoso
     </author>
     <content src="index.html" />
     <access origin="*" />

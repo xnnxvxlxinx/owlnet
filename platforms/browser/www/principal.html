@@ -43,13 +43,7 @@ var urlM=obtenerURL();
     	});
 	$.get(urlM+"/php/subhead.php", function(html){
    $("#subHeadID").html(html);
-cargarMas2();
-    	});	
-var resolucionheight=screen.height;
-var resolucionheight10=resolucionheight*0.15;
-}
-						function initialize() {
-						var pathname = window.location.pathname;
+   var pathname = window.location.pathname;
 							var URLsearch = window.location.search;	
 							
 							if(URLsearch==''){
@@ -59,18 +53,19 @@ var resolucionheight10=resolucionheight*0.15;
 							}else{
 						
 								URLsearch=URLsearch.replace('?busqueda=', '');
-							
+							$('#search_bar_cabeza').val(decodeURIComponent(URLsearch));
 							GetBusqueda="?busqueda=" + URLsearch;
 							
-							GetbusTag="?Bus=" + URLsearch;
+							//GetbusTag="?Bus=" + URLsearch;
 						
 							}
-								
-							
-								llamarmarc(GetBusqueda);
-								htmlTagsInicial();
-								
-						} 
+							buscheck=GetBusqueda;
+cargarMas2();
+    	});	
+var resolucionheight=screen.height;
+var resolucionheight10=resolucionheight*0.15;
+}
+			
 						
 
 						function desaparecer(){
@@ -80,113 +75,49 @@ var resolucionheight10=resolucionheight*0.15;
 						}
 						
 							var randomnum =1;
-						function mostrarProductos(PUESTOS, Titulo,  Descri, ID, ImgUser, ID_Usuario){
-							var div=document.getElementById('mostradorProductos');
-							var indiv = document.createElement('div');
-								indiv.id='Producto_div_' + contproductos;
-								indiv.style.display='none';
-							var texto='<div class=\"imagenProducto\"><img src=\"https://nirjob.com/' + ImgUser + '?'+ randomnum +'\"></div>';
-							texto=texto+'<div class=\"descripcionProducto\"><h3><a href=\"Login/visorServicios.html?ID='+ID+'\">' + Titulo + '</a></h3><p>' + Descri + '</p></div>';
-							texto=texto+'<div class=\"precioProducto\"><h3>$' + PUESTOS + '</h3></div>';
-								div.appendChild(indiv);
-								document.getElementById('Producto_div_' + contproductos).innerHTML=texto;
-								$("#Producto_div_" + contproductos).fadeIn(250);
-								contproductos=contproductos + 1;
-						}	  
+				
 					
 
 						function llamarmarc(busqueda){
 							desaparecer();
 			
 							document.getElementById('mostradorProductos').innerHTML='';
-							contadorProductosBaj=0;
-	contproductosBaj=0;
-								contadorProductosBaj2=0;
-	contproductosBaj2=0;
+						
+								contador_proyectos=0;
+	contador_proyDes=0;
 							buscheck=busqueda;
 							setTimeout(function(){
-								
-								
+
 								contproductos=0;
-								document.getElementById('ajax-loader').style.display='block';
-								
-								
-									$.getJSON('https://nirjob.com/archivosbase/php/Buscador100Jq_contratacion/productoscontratacion.php' + busqueda, function(data) {
-								
-									var tamanio=data.length;
-										for(var i=0; i<tamanio; i++){
-											var ID=data[i].ID;
-											var ID_Usuario=data[i].ID_Usuario;
-											var Titulo=data[i].Titulo;
-											var ImgUser=data[i].ImgUser;
-											var PUESTOS=data[i].PUESTOS;
-											var Descri=data[i].Descri;
-											
-										
-										
-										}
-										
-									document.getElementById('ajax-loader').style.display='none';	
-									});
-									
+					
 									
 							}, 250);
-							/*if(iniCargarMas1==0){
-								iniCargarMas1=1;
-							}else{*/
+						
 								cargarMas2();
-					
-							/*}*/
-							
+
 						}
 							
 					
 						var cont=0;
 						var Ninfowindow=null;
 						
-						
-							
-						function subTag(TAG){
-							document.getElementById('menu_izquierda').style.display='block';
-							
-								$.getJSON('https://nirjob.com/archivosbase/php/Buscador100Jq_contratacion/funciontablaTag.php', function(datat) {
-									
-								var tamaniot=datat.length;
-									for(var i=0; i<tamaniot; i++){
-									var ID=datat[i].ID;
-									
-									
-								
-									}
-							
-								});	
-
-							
-						}
 						function ordenarProductos(e){
 								if(buscheck==''){
 								var busc='?ordenar='+ e.value;
 								buscheck=buscheck + busc;
+						
 								llamarmarc(buscheck);
 								}else{
 									var busc='&ordenar='+ e.value;
 								buscheck=buscheck + busc;
+							
 								llamarmarc(buscheck);
 								}
 						}	  
-						function checkTagSecundario(e, Tag){
-								var check=e.checked;
-								var busc='&tagS%5B%5D='+ e.value;
-								if(check==true){
-								buscheck=buscheck + busc;
-								}else{
-									buscheck=buscheck.replace(busc, '');
-								}
-								
-								llamarmarc(buscheck);
-						}
-						function buscadorTagP(ID){
-							document.getElementById('menu_izquierda').style.display='block';
+				
+						function buscador_por_Tag(ID){
+						
+					
 							if(buscheck==''){
 								var busc='?tag='+ ID;
 							
@@ -198,47 +129,29 @@ var resolucionheight10=resolucionheight*0.15;
 								
 								buscheck=buscheck + busc;
 								llamarmarc(buscheck);
+							
 								}
 						} 
+					function buscador_por_TagQ(ID){
+					buscheck=buscheck.replace('?tag='+ ID, '');
+					buscheck=buscheck.replace('&tag='+ ID, '');
+					llamarmarc(buscheck);
+					}
+						function buscador_por_TagQQ(ID){
+					buscheck=buscheck.replace('?tag='+ ID, '');
+					buscheck=buscheck.replace('&tag='+ ID, '');
 					
-						function htmlTagsInicial(){
-							document.getElementById('ajax-loader').style.display='block';
-							$.get('https://nirjob.com/archivosbase/php/Buscador100Jq_contratacion/funcionhtmlTagsInicial.php'+ GetbusTag, function(texto) {
+					}
 						
-								texto="<div id='botondesplegarSubtag' onclick='desplegarSubCategorias();'>Seleccionar Subcategor&iacute;as&nbsp;&nbsp;&#9660;</div>" + texto;
-								document.getElementById('menu_izquierda').innerHTML=texto;
-								document.getElementById('ajax-loader').style.display='none';
-							
-						subTag("0");
-						llamarmarc(buscheck);
-						cambiarColor('', 'T');
-							});	
-							
-						}  
 						
-						function cambiarColor(e, num)
-						{
-							var x = document.getElementsByClassName("logoTag");
-							for (var i = 0; i < x.length; i++) {
-								x[i].style.backgroundColor = "#0288D1";
-							}
-							if(num==0){
-							var y=e.childNodes;
-							y[1].style.backgroundColor = "#FFCA28";
-							}else{
-						
-							}
 
-	}
-	var contadorProductosBaj=0;
-	var contproductosBaj=0;
+
 	
 
-	var contadorProductosBaj2=0;
-	var contproductosBaj2=0;
-	function ProductosBajoMapa2(NUM){
-
-	 $.getJSON('https://nirjob.com/archivosbase/php/Buscador100Jq_contratacion/productoscontratacion.php' + buscheck, function(data) {
+	var contador_proyectos=0;
+	var contador_proyDes=0;
+	function Cargar_Proyectos(NUM){
+	 $.getJSON(urlM + '/app/busqueda.php' + buscheck, function(data) {
 
 var ini=NUM*8;
 		var tamanio=data.length;
@@ -249,42 +162,56 @@ var ini=NUM*8;
 		}
 		
 			for(var i=ini; i<fin; i++){
-				var ID=data[i].ID;
-				var ID_Usuario=data[i].ID_Usuario;
-				var Titulo=data[i].Titulo;
+				var ID=data[i].id;
+				var ID_Usuario=data[i].id_usuario;
+				var Titulo=data[i].titulo;
 				var ImgUser=data[i].ImgUser;
-				var PUESTOS=data[i].PUESTOS;
-				var Descri=data[i].Descri;
-				var TIPO=data[i].TIPO;
-				var CATEGORIA=data[i].CATEGORIA;
-				if(PUESTOS=='0'){
-					PUESTOS='A convenir';
+				var precio=data[i].precio;
+				var Descri=data[i].descripcion;
+				var plazo=parseInt(data[i].plazo);
+				var tiempo=parseInt(data[i].tiempo);
+				var tiempoAct=parseInt(data[i].tiempoAct);
+				if(precio=='0'){
+					precio='A convenir';
 				}else{
-					PUESTOS='$' + PUESTOS;
+					precio='$' + precio;
 				}
-				if(TIPO==1){
-					TIPO='Vacante:'
-				}else{
-					TIPO='Servicio:'
-				}
+			
+				
 var div=document.getElementById('mostradorProductos');
 	var indiv = document.createElement('div');
-		indiv.id='Producto_div_' + contproductosBaj2;
+		indiv.id='Producto_div_' + contador_proyDes;
 		indiv.className='productosBajoMapa';
 		indiv.style.display='none';
-	var texto='<div class=\"imagenProducto\"><img src=\"https://nirjob.com/' + ImgUser + '?'+ randomnum +'\"></div>';
-	texto=texto+'<div class=\"descripcionProducto\"><h3><a href=\"Login/visorServicios.html?ID='+ID+'\">'+ TIPO + ' ' + Titulo + '</a></h3></div>';
-	texto=texto+'<div class=\"precioProducto\"><h3>' + PUESTOS + '</h3></div>';
+	var texto='<div class=\"imagenProducto\"><img src=\"' + urlM + '/' + ImgUser + '?'+ randomnum +'\"></div>';
+	var quedaD=parseInt((tiempoAct-(plazo*24*3600)-tiempo)/(3600*24));
+	var quedaH=parseInt((-quedaD*3600*24+(tiempoAct-(plazo*24*3600)-tiempo))/(3600));
+	var quedaM=parseInt((-quedaD*3600*24-quedaH*3600+(tiempoAct-(plazo*24*3600)-tiempo))/(60));
+	quedaD=quedaD*(-1);
+	quedaH=quedaH*(-1);
+	quedaM=quedaM*(-1);
+if((plazo*24*3600)+tiempo>tiempoAct){
+plazo2=''
+	texto=texto+'<div class=\"descripcionProducto\"><h3><a href=\"proyectos.html?ID='+ID+'\">'+ plazo2 + ' ' + Titulo + '</a></h3></div>';
+		texto=texto+'<div class=\"plazoProducto\"><h3>Quedan:' + quedaD + 'Dias, '+quedaH+'Horas, '+quedaM+'Min<br/></h3></div>';
+}else{
+					plazo2='Expirado:'
+					texto=texto+'<div class=\"descripcionProducto\"><h3>'+ plazo2 + ' ' + Titulo + '</h3></div>';
+						texto=texto+'<div class=\"plazoProducto\"><h3></h3></div>';
+				}
+				
+			
+	texto=texto+'<div class=\"precioProducto\"><h3>' + precio + '</h3></div>';
 		div.appendChild(indiv);
-		document.getElementById('Producto_div_' + contproductosBaj2).innerHTML=texto;
-		$("#Producto_div_" + contproductosBaj2).fadeIn(250);
-		contproductosBaj2=contproductosBaj2 + 1;
+		document.getElementById('Producto_div_' + contador_proyDes).innerHTML=texto;
+		$("#Producto_div_" + contador_proyDes).fadeIn(250);
+		contador_proyDes=contador_proyDes + 1;
 			}	
 		});
 	}
 		function cargarMas2(){
-			ProductosBajoMapa2(contadorProductosBaj2);
-		contadorProductosBaj2=contadorProductosBaj2+1;
+			Cargar_Proyectos(contador_proyectos);
+		contador_proyectos=contador_proyectos+1;
 		}
 	
 		var desplegarSubCategoriasC=0;
@@ -325,8 +252,8 @@ desplegarSubCategoriasC=0;
 			<div id='productosBuscador' style=''>
 			<div id='productosOrdenar'>
 			<select onchange='ordenarProductos(this)'>
-			<option value='0'>Ordenar</option>
-			<option value='1'>Fecha de publicacion</option>
+			<option value='0'>Fecha de publicacion (m&aacute;s nuevos primero)</option>
+			<option value='1'>Fecha de publicacion (m&aacute;s antiguos primero)</option>
 			<option value='2'>Precio (Mayor a menor)</option>
 			<option value='3'>Precio (Menor a mayor)</option>
 			</select>

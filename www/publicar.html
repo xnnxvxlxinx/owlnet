@@ -33,6 +33,7 @@
 	var TagPrinciForm=0;
 	var InputTitulo='';
 var InputDescripcion='';
+var InputRequisitos='';
 var InputTagSecundario=[];
 var UriImagnes=[];
 var TotalImagenes=0;
@@ -61,6 +62,7 @@ setTimeout(function(){
 	TagPrinciForm=0;
 	 InputTitulo='';
  InputDescripcion='';
+ InputRequisitos='';
  InputPrecio=0;
   InputPlazo=0;
  UriImagnes=[];
@@ -95,7 +97,8 @@ function mostrarTitulo(){
 var div=document.getElementById('seleccionadorTituloC');
 
 		var texto='<div ><h3>T&iacute;tulo de la Publicaci&oacute;n.</h3><input type="text" id="InputTitulo" value="'+ InputTitulo +'" /></br>';
-		 texto= texto + '<h3>Descripci&oacute;n de la Publicaci&oacute;n.</h3><input type="text" id="InputDescripcion" value="' + InputDescripcion +'" /></br>';
+		 texto= texto + '<h3>Descripci&oacute;n de la Publicaci&oacute;n.</h3><textarea type="text" id="InputDescripcion">' + InputDescripcion +'</textarea></br>';
+		 texto= texto + '<h3>Requisitos para el proyecto.</h3><textarea type="text" id="InputRequisitos">' + InputRequisitos +'</textarea></br>';
 		 texto= texto + '<h3>*Precio $:</h3><input type="number" id="InputPrecio" value="' + InputPrecio +'" /></br>';
 		 texto= texto + '<h3>*Plazo:</h3><input type="number" id="InputPlazo" value="' + InputPlazo +'" />D&iacute;as</br>';
 		 texto=texto +'<input type="submit" value="Siguiente" onclick="seleccionadorTagsSecundario();" style="background-color: #4FC3F7;"></div>';
@@ -162,9 +165,10 @@ texto= texto + "<button type='button' onclick='cerrar(\"mensaje_javascript\")'>A
 function seleccionadorTagsSecundario(){
 InputTitulo=document.getElementById('InputTitulo').value;
 InputDescripcion=document.getElementById('InputDescripcion').value;
+InputRequisitos=document.getElementById('InputRequisitos').value;
 InputPrecio=document.getElementById('InputPrecio').value;
 InputPlazo=document.getElementById('InputPlazo').value;
-if(InputTitulo!='' && InputDescripcion!='' && InputPrecio!='' && InputPrecio>=0 && InputPlazo>0 && InputPlazo!=''){
+if(InputTitulo!='' && InputDescripcion!='' && InputRequisitos!='' && InputPrecio!='' && InputPrecio>=0 && InputPlazo>0 && InputPlazo!=''){
 $("#seleccionadorTitulo").fadeOut(250);
 document.getElementById('ajax-loader').style.display='block';
 setTimeout(function(){
@@ -176,7 +180,7 @@ document.getElementById('ajax-loader').style.display='none';
 }else{
 var mensaje=document.getElementById('mensaje_javascript');
 		mensaje.style.display='block';
-var texto="<p>La publicaci&oacute;n debe tener un t&iacute;tulo, una descripci&oacute;n, un precio y un plazo.<br/>(* Precio=0, A Convenir)</p>";
+var texto="<p>La publicaci&oacute;n debe tener un t&iacute;tulo, una descripci&oacute;n, requisitos, un precio y un plazo.<br/>(* Precio=0, A Convenir)</p>";
 texto= texto + "<button type='button' onclick='cerrar(\"mensaje_javascript\")'>Aceptar</button>";
 		mensaje.childNodes[0].innerHTML=texto;
 }
@@ -264,7 +268,8 @@ function subirdatosservicio(){
 var div=document.getElementById('SubirDatosC');
 var texto='<div>';
 		var texto='<h3>T&iacute;tulo de la Publicaci&oacute;n.</h3><input type="text" name="titulo" value="'+ InputTitulo +'" required readonly/></br>';
-		 texto= texto + '<h3>Descripci&oacute;n de la Publicaci&oacute;n.</h3><input name="descripcion" type="text" required readonly value="' + InputDescripcion +'" /></br>';
+		 texto= texto + '<h3>Descripci&oacute;n de la Publicaci&oacute;n.</h3><textarea name="descripcion" type="text" required readonly>' + InputDescripcion +'</textarea></br>';
+		 	 texto= texto + '<h3>Requisitos para el proyecto.</h3><textarea type="text" name="Requisitos" required readonly>' + InputRequisitos +'</textarea></br>';
 texto= texto + '<h3>Valor $:</h3><input name="puestos" type="text"  required readonly value="' + InputPrecio +'" /></br>';	
 texto= texto + '<h3>Plazo [Dias]:</h3><input name="plazo1" type="text"  required readonly value="' + InputPlazo +'" /></br>';		 
 		 texto= texto + '<input type="text" name="tag_principal" required readonly value="' +  TagPrinciForm +'" style="display:none"/></br>';

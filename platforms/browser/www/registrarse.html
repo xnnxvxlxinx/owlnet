@@ -51,6 +51,13 @@ function tiene_mayusculas(texto){
    }
    return 0;
 }
+function esNumUnico(texto){
+var anio=texto.substr(0, 4);
+if(anio>=2000){
+return 1;
+}
+return 0;
+}
 function es_mail(texto){
 var arrova=0;
 var opunto=0;
@@ -82,9 +89,12 @@ $(function(){
 			var valorContra=document.getElementById('userPwd').value;
 			var valorContra2=document.getElementById('userPwd2').value;
 			var valorMail=document.getElementById('mail').value;
-			if(tiene_numeros(valorContra)==1){
+			var valorNumUnico=document.getElementById('n_unico').value;
+			if(esNumUnico(valorNumUnico)==1){
+			if(valorNumUnico.length==9){
+			//if(tiene_numeros(valorContra)==1){
 			if(tiene_minusculas(valorContra)==1){
-			if(tiene_mayusculas(valorContra)==1){
+			//if(tiene_mayusculas(valorContra)==1){
 			if(valorContra.length>=8){
 			if(valorContra==valorContra2){
 			/*$.get(urlM+"/app/registro.php?nombre="+, function(data){
@@ -94,7 +104,7 @@ $(function(){
 			setTimeout(function(){
 			
             $.ajax({
-                url: "http://cc95c1ed.ngrok.io/app/registro.php",
+                url: urlM + "/app/registro.php",
                 type: "post",
                 dataType: "json",
                 data: formData,
@@ -165,13 +175,13 @@ texto= texto + "<button type='button' onclick='cerrar(\"mensaje_javascript\")'>R
 var texto="<p>La contraseña debe tener al menos 8 caracteres.</p>";
 texto= texto + "<button type='button' onclick='cerrar(\"mensaje_javascript\")'>Regresar</button>";
 		mensaje.childNodes[0].innerHTML=texto;
-				}}else{
+				}/*}else{
 				var mensaje=document.getElementById('mensaje_javascript');
 		mensaje.style.display='block';
 var texto="<p>La contraseña debe tener al menos 1 Mayuscula.</p>";
 texto= texto + "<button type='button' onclick='cerrar(\"mensaje_javascript\")'>Regresar</button>";
 		mensaje.childNodes[0].innerHTML=texto;
-				}}else{
+				}*/}else{
 				var mensaje=document.getElementById('mensaje_javascript');
 		mensaje.style.display='block';
 var texto="<p>La contraseña debe tener al menos 1 Miniscula.</p>";
@@ -180,10 +190,22 @@ texto= texto + "<button type='button' onclick='cerrar(\"mensaje_javascript\")'>R
 				}}else{
 				var mensaje=document.getElementById('mensaje_javascript');
 		mensaje.style.display='block';
+var texto="<p>El n&uacute;mero &Uacute;nico debe tener 9 n&uacute;meros.</p>";
+texto= texto + "<button type='button' onclick='cerrar(\"mensaje_javascript\")'>Regresar</button>";
+		mensaje.childNodes[0].innerHTML=texto;
+				}}else{
+				var mensaje=document.getElementById('mensaje_javascript');
+		mensaje.style.display='block';
+var texto="<p>El n&uacute;mero &Uacute;nico no es correcto.</p>";
+texto= texto + "<button type='button' onclick='cerrar(\"mensaje_javascript\")'>Regresar</button>";
+		mensaje.childNodes[0].innerHTML=texto;
+				}/*}else{
+				var mensaje=document.getElementById('mensaje_javascript');
+		mensaje.style.display='block';
 var texto="<p>La contraseña debe tener al menos 1 N&uacute;mero.</p>";
 texto= texto + "<button type='button' onclick='cerrar(\"mensaje_javascript\")'>Regresar</button>";
 		mensaje.childNodes[0].innerHTML=texto;
-				}
+				}*/
         document.getElementById('ajax-loader').style.display='none';
 		});
 		});
@@ -213,7 +235,7 @@ texto= texto + "<button type='button' onclick='cerrar(\"mensaje_javascript\")'>R
 		
 		 
 		<div id='contenido'>
-		<div id="logo" class="logo">
+		<div onclick='location.href="index.html";' id="logo" class="logo">
             
         </div>
 		<div id='form_inicio_sesion' class='form_inicio'>
