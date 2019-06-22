@@ -640,8 +640,18 @@ function cancelarconfiguauario(div){
 	$("#" + div).fadeOut("slow");
 	
 }			
-	
-	
+
+	function ContratoBotonP(){
+	textoCon="<p>Aceptar Proyecto</p><h3>Al aceptar el proyecto podra ver el contacto del usuario.</h3><button type='button' onclick='cancelarconfiguauario(\"popUpError\");aceptarContr();'>Aceptar</button><button type='button' onclick='cancelarconfiguauario(\"popUpError\");'>Cancelar</button>";
+	 $("#alert").html(textoCon);
+					$("#popUpError").fadeIn("slow");
+			
+		}
+		function aceptarContr(){
+		$('#ContratoBoton').fadeOut("slow");
+		
+		$('#ContactoDes').fadeIn("slow");
+		}
 </script>
 <body onload='initialize();'>
     <div id="container">

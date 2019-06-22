@@ -185,4 +185,26 @@ input:focus {
 	right:0px;	
 	pointer-events: none;
 }
+textarea{
+	    width: 90%;
+    padding-top: 0.8em;
+    padding-bottom: 0.8em;
+    padding-left: 0.75em;
+    background: transparent;
+    border: none;
+    /* border: 0; */
+    /* border-bottom: 1px solid rgba(255,255,255,0.04); */
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.3), inset 0px 1px 0px rgba(255,255,255,0.07);
+    /* outline: none; */
+    margin-bottom: 5%;
+    color: #46485c;
+    font-size: 1em;
+    height: 4em;
+}
+#InputDescripcion{
+	    height: 6em;
+}
+#InputRequisitos{
+	    height: 5em;
+}
   
