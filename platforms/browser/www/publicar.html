@@ -239,20 +239,13 @@ setTimeout(function(){
 $("#seleccionadorTags").fadeIn(250);
 }, 255);
 }
-if(num==2){
-$("#seleccionadorTagsSecundario").fadeOut(250);
-mostrarTitulo();
+
+if(num==3){
+$("#seleccionadorImagenes").fadeOut(250);
+
 setTimeout(function(){
 
 $("#seleccionadorTitulo").fadeIn(250);
-}, 255);
-}
-if(num==3){
-$("#seleccionadorImagenes").fadeOut(250);
-ObtenerTagSecundario(TagPrinciForm);
-setTimeout(function(){
-
-$("#seleccionadorTagsSecundario").fadeIn(250);
 }, 255);
 }
 if(num==4){
@@ -345,7 +338,7 @@ ft.upload(UriImagnes[i], encodeURI(urlM + "/app/imagenesSubir.php"), win, fail, 
 var mensaje=document.getElementById('mensaje_javascript');
 		mensaje.style.display='block';
 var texto="<p>Se ha publicado su proyecto con &eacute;xito.</p>";
-texto= texto + "<button type='button' onclick='location.href=\"../index.html\"; cerrar(\"mensaje_javascript\");'>Continuar</button>";
+texto= texto + "<button type='button' onclick='location.href=\"index.html\"; cerrar(\"mensaje_javascript\");'>Continuar</button>";
 //texto= texto + "<button type='button' onclick='cerrar(\"mensaje_javascript\")'>Regresar</button>";
 		mensaje.childNodes[0].innerHTML=texto;
 }			}else{

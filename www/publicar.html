@@ -242,7 +242,7 @@ $("#seleccionadorTags").fadeIn(250);
 
 if(num==3){
 $("#seleccionadorImagenes").fadeOut(250);
-ObtenerTagSecundario(TagPrinciForm);
+
 setTimeout(function(){
 
 $("#seleccionadorTitulo").fadeIn(250);
@@ -338,7 +338,7 @@ ft.upload(UriImagnes[i], encodeURI(urlM + "/app/imagenesSubir.php"), win, fail, 
 var mensaje=document.getElementById('mensaje_javascript');
 		mensaje.style.display='block';
 var texto="<p>Se ha publicado su proyecto con &eacute;xito.</p>";
-texto= texto + "<button type='button' onclick='location.href=\"../index.html\"; cerrar(\"mensaje_javascript\");'>Continuar</button>";
+texto= texto + "<button type='button' onclick='location.href=\"index.html\"; cerrar(\"mensaje_javascript\");'>Continuar</button>";
 //texto= texto + "<button type='button' onclick='cerrar(\"mensaje_javascript\")'>Regresar</button>";
 		mensaje.childNodes[0].innerHTML=texto;
 }			}else{
