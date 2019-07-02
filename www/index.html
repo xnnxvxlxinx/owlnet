@@ -38,7 +38,7 @@ $("#" + div).fadeOut(150);
   		.fail(function() {
 		var mensaje=document.getElementById('mensaje_javascript');
 		mensaje.style.display='block';
-var texto="<p>Su dispositivo no esta conectado al Internet.</br>¿Decea intentar conectar de nuevo?</p>";
+var texto="<p>Su dispositivo no esta conectado al Internet.</br>¿Decea intentar conectar de nuevo?</p>"+urlM;
 texto= texto + "<button type='button' onclick='location.href =\"index.html\";'>Si</button>";
 texto= texto + "<button type='button' onclick='cerrar(\"mensaje_javascript\");'>No</button>";
 		mensaje.childNodes[0].innerHTML=texto;
