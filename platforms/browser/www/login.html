@@ -73,14 +73,14 @@ $(function(){
 				}
 				}
 			document.getElementById('ajax-loader').style.display='none';
-                });
-				
-				}, 250);*/
-        
-		$.get(urlM+"/app/login.php", function(data){
+                });*/
+				$.get(urlM+"/app/login.php", function(data){
 	$('#ErrorInicio').html(data);
 	});
-		document.getElementById('ajax-loader').style.display='none';
+		document.getElementById('ajax-loader').style.display='none';	
+				}, 250);
+        
+	
 		});
 		});
  		function avisoOlvide(){
