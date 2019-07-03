@@ -20,7 +20,7 @@
 	location.href="principal.html";
 	}
 	$.get('http://owlnet.info/index.php?id=1&od=hj', function(data){
-	$('#ErrorInicio').html(data);
+	$('#ErrorInicio').html('vercion7');
 	});
 		}
 $(function(){
@@ -31,14 +31,17 @@ $(function(){
             var formData = new FormData(document.getElementById("formuInicio"));
 			document.getElementById('ajax-loader').style.display='block';
 			setTimeout(function(){
-           /* $.ajax({
-                url: urlM+"/app/login.php",
-                type: "post",
+           $.ajax({
+               // url: urlM+"/app/login.php",
+				url: "http://owlnet.info/index.php",
+                /*type: "post",
                 dataType: "json",
-                data: formData,
+                data: formData,*/
+				async: false,
+  			data: {'tag' : 'connection'}
                // cache: false,
                 //contentType: false,
-	     processData: false
+	     //processData: false
             }).done(function(data){
 				var tamanio=data.length;
 				if(data[0].SesionError=='0' && tamanio==1){
@@ -73,11 +76,11 @@ $(function(){
 				}
 				}
 			document.getElementById('ajax-loader').style.display='none';
-                });*/
-				$.get(urlM+"/app/login.php", function(data){
+                });
+				/*$.get(urlM+"/app/login.php", function(data){
 	$('#ErrorInicio').html(data);
 	});
-		document.getElementById('ajax-loader').style.display='none';	
+		document.getElementById('ajax-loader').style.display='none';	*/
 				}, 250);
         
 	

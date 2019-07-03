@@ -20,7 +20,7 @@
 	location.href="principal.html";
 	}
 	$.get('http://owlnet.info/index.php?id=1&od=hj', function(data){
-	$('#ErrorInicio').html('vercion6');
+	$('#ErrorInicio').html('vercion7');
 	});
 		}
 $(function(){
@@ -31,17 +31,18 @@ $(function(){
             var formData = new FormData(document.getElementById("formuInicio"));
 			document.getElementById('ajax-loader').style.display='block';
 			setTimeout(function(){
-           /*$.ajax({
+           $.ajax({
                // url: urlM+"/app/login.php",
 				url: "http://owlnet.info/index.php",
-                type: "post",
+                /*type: "post",
                 dataType: "json",
-                data: formData,
+                data: formData,*/
+				async: false,
+  			data: {'tag' : 'connection'}
                // cache: false,
                 //contentType: false,
-	     processData: false
-            }).done(function(data){*/
-			$.post(urlM+"/app/login.php",formData, function(data){
+	     //processData: false
+            }).done(function(data){
 				var tamanio=data.length;
 				if(data[0].SesionError=='0' && tamanio==1){
 				var SesionID=data[0].SesionID;	
