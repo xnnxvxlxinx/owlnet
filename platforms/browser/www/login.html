@@ -1,0 +1,144 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Inicio de Sesi&oacute;n</title>
+     <meta
+  name="viewport"
+  content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+   
+	<link rel="stylesheet" type="text/css" href="css/ajax-loader.css">
+	<link rel="stylesheet" type="text/css" href="css/mensaje_javascript.css">
+	<link rel="stylesheet" type="text/css" href="css/login.css">
+	<script src="js/jquerymobile/jquery-3.2.1.min.js"></script>
+ <script src="js/jquerymobile/jquery.mobile-1.4.5.min.js"></script>
+ <script src="js/conexionDomino.js"></script>
+	<script>
+	var urlM=obtenerURL();
+	//var urlM='owndafa.cisjsada';
+	function initialize() {
+	if(localStorage.getItem("SesionLoggedin")=='true'){
+	location.href="principal.html";
+	}
+	$.get('http://owlnet.info/index.php?id=1&od=hj', function(data){
+	$('#ErrorInicio').html('vercion13');
+	});
+		}
+$(function(){
+        $("#formuInicio").on("submit", function(e){
+			
+            e.preventDefault();
+            var f = $(this);
+            var formData = new FormData(document.getElementById("formuInicio"));
+			document.getElementById('ajax-loader').style.display='block';
+			setTimeout(function(){
+           $.ajax({
+                url: urlM+"/app/login.php",
+				//url: "http://owlnet.info/index.php",
+                type: "POST",
+                dataType: "json",
+                data: formData,
+               cache: false,
+async: false,               
+			   contentType: false,
+	     processData: false
+            }).done(function(data){
+				var tamanio=data.length;
+				if(data[0].SesionError=='0' && tamanio==1){
+				var SesionID=data[0].SesionID;	
+				var SesionNombre=data[0].SesionNombre;
+				var SesionDescripcion=data[0].SesionDescripcion;
+				var SesionMail=data[0].SesionMail;
+				var SesionTelefono=data[0].SesionTelefono;
+				var SesionLoggedin=data[0].SesionLoggedin;
+				var SesionUsuario=data[0].SesionUsuario;
+				localStorage.setItem("SesionID", SesionID);
+				localStorage.setItem("SesionNombre", SesionNombre);
+				localStorage.setItem("SesionDescripcion", SesionDescripcion);
+				localStorage.setItem("SesionMail", SesionMail);
+				localStorage.setItem("SesionTelefono", SesionTelefono);
+				localStorage.setItem("SesionLoggedin", SesionLoggedin);
+				localStorage.setItem("SesionUsuario", SesionUsuario);
+				location.href="principal.html";
+				$("#ErrorInicio").html("");
+				}else{
+				if(data[0].SesionError=='1'){
+				$("#ErrorInicio").html("Error");
+				}
+				if(data[0].SesionError=='2'){
+				$("#ErrorInicio").html("El nombre de usuario o la contraseña están incorrectos.");
+				}
+				if(data[0].SesionError=='3'){
+				$("#ErrorInicio").html("El nombre de usuario o la contraseña están incorrectos.");
+				}
+				if(data[0].SesionError=='4'){
+				$("#ErrorInicio").html("Error 404");
+				}
+				}
+			document.getElementById('ajax-loader').style.display='none';
+                }).fail(function(jqXHR, textStatus, errorThrown){
+    alert(textStatus, errorThrown);
+	});
+				}, 250);
+        
+	
+		});
+		});
+ 		function avisoOlvide(){
+			var mensaje=document.getElementById('mensaje_javascript');
+		mensaje.style.display='block';
+var texto="<h3>Aviso.</h3><p>Para obtener una nueva contrase&ntilde;a ser&aacute; dirigido a la plataforma web. </p>";
+texto= texto + "<button type='button' onclick='location.href=\"\";'>Aceptar</button>";
+texto= texto + "<button type='button' onclick='cerrar(\"mensaje_javascript\");'>Cancelar</button>";
+		mensaje.childNodes[0].innerHTML=texto;
+		}
+		function cerrar(div){		
+$("#" + div).fadeOut(150);
+}
+	</script>
+</head>
+<body onload='initialize();'>
+    <div id="container">
+		<div id='contenido'> 
+		 <div id="logo" class="logo">
+            
+        </div>
+		<div id='form_inicio_sesion' class='form_inicio'>
+<div id='ErrorInicio'></div>
+    <div class="login">
+<form method="post" id='formuInicio' name="f1">	
+<label for="username"><div class="textLabel">N&uacute;mero &Uacute;nico</div></label>
+<input type="text" name="username" id="username" required placeholder="">
+<br/>
+<label for="userPwd"><div class="textLabel">Contrase&ntilde;a</div></label>
+<input type="password" name="password" id="userPwd" required placeholder="">
+<br/>
+<input type="submit" name="Submit" value="Entrar">
+
+</form>
+<br/>
+<div id="aunnocuenta">
+
+
+    <input type="submit" onclick='location.href="registrarse.html"' value="Registrarse" >
+
+</div>
+</br>
+<input style='display:none;' type="submit" onclick='avisoOlvide();' value="Olvide mi Contrase&ntilde;a" >
+</div>
+		</div>
+		</div>
+		<div id='footer'>
+
+		</div>
+		<div id='ajax-loader'>
+	<img src='img/ajax-loader.gif'/>
+	</div>
+	<div id='mensaje_javascript'><div></div></div>
+    </div>
+	<script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+	 <script type="text/javascript">
+        app.initialize();
+    </script>
+</body>
+</html>
