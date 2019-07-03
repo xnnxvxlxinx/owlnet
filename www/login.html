@@ -19,7 +19,7 @@
 	if(localStorage.getItem("SesionLoggedin")=='true'){
 	location.href="principal.html";
 	}
-	$.get('http://owlnet.info/index.php', function(data){
+	$.get('http://owlnet.info/index.php?id=1&od=hj', function(data){
 	$('#ErrorInicio').html(data);
 	});
 		}
@@ -36,8 +36,8 @@ $(function(){
                 type: "post",
                 dataType: "json",
                 data: formData,
-                cache: false,
-                contentType: false,
+               // cache: false,
+                //contentType: false,
 	     processData: false
             }).done(function(data){
 				var tamanio=data.length;
