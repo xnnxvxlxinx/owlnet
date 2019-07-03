@@ -40,7 +40,7 @@ $(function(){
                 //contentType: false,
 	     processData: false
             }).done(function(data){
-				var tamanio=data.length;
+				/*var tamanio=data.length;
 				if(data[0].SesionError=='0' && tamanio==1){
 				var SesionID=data[0].SesionID;	
 				var SesionNombre=data[0].SesionNombre;
@@ -71,7 +71,7 @@ $(function(){
 				if(data[0].SesionError=='4'){
 				$("#ErrorInicio").html("Error 404");
 				}
-				}
+				}*/
 			document.getElementById('ajax-loader').style.display='none';
                 });
 				/*$.get(urlM+"/app/login.php", function(data){
