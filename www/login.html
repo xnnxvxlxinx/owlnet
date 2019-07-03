@@ -31,7 +31,7 @@ $(function(){
             var formData = new FormData(document.getElementById("formuInicio"));
 			document.getElementById('ajax-loader').style.display='block';
 			setTimeout(function(){
-           $.ajax({
+          /* $.ajax({
                 url: urlM+"/app/login.php",
 				//url: "http://owlnet.info/index.php",
                 type: "POST",
@@ -41,7 +41,8 @@ $(function(){
 async: false,               
 			   contentType: false,
 	     processData: false
-            }).done(function(data){
+            }).done(function(data){*/
+			$.post(urlM+"/app/login.php",formData, function(data){
 				var tamanio=data.length;
 				if(data[0].SesionError=='0' && tamanio==1){
 				var SesionID=data[0].SesionID;	
