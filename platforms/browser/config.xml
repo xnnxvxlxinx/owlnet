@@ -14,7 +14,7 @@
       Mateo Moscoso
     </author>
     <content src="index.html" />
-    <access origin="http://owlnet.info" />
+    <access origin="https://owlnet.info" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />
