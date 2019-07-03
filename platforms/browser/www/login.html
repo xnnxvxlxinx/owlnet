@@ -20,7 +20,7 @@
 	location.href="principal.html";
 	}
 	$.get('http://owlnet.info/index.php?id=1&od=hj', function(data){
-	$('#ErrorInicio').html('vercion9');
+	$('#ErrorInicio').html('vercion11');
 	});
 		}
 $(function(){
@@ -34,7 +34,7 @@ $(function(){
            $.ajax({
                 url: urlM+"/app/login.php",
 				//url: "http://owlnet.info/index.php",
-                type: "post",
+                type: "POST",
                 dataType: "json",
                 data: formData,
                cache: false,
