@@ -1,6 +1,6 @@
 
 function obtenerURL(){
-	var url='http://owlnet.info';
+	var url='https://owlnet.info';
 
 	return url;
 }
