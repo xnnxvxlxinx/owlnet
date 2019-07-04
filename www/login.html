@@ -37,7 +37,7 @@ $(function(){
                 dataType: "json",
                 data: formData,
                 cache: false,
-                //contentType: false,
+                contentType: false,
 	     processData: false
             }).done(function(data){
 				var tamanio=data.length;
@@ -73,9 +73,7 @@ $(function(){
 				}
 				}
 			document.getElementById('ajax-loader').style.display='none';
-                }).fail( function( jqXHR, textStatus, errorThrown ) {
-    alert( textStatus+'/**/'+errorThrown);
-});
+                });
 				
 				}, 250);
         
