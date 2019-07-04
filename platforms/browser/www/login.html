@@ -19,9 +19,9 @@
 	if(localStorage.getItem("SesionLoggedin")=='true'){
 	location.href="principal.html";
 	}
-	$.get('http://owlnet.info/index.php', function(data){
+	/*$.get('http://owlnet.info/index.php', function(data){
 	$('#ErrorInicio').html(data);
-	});
+	});*/
 		}
 $(function(){
         $("#formuInicio").on("submit", function(e){
@@ -73,7 +73,9 @@ $(function(){
 				}
 				}
 			document.getElementById('ajax-loader').style.display='none';
-                });
+                }).fail( function( jqXHR, textStatus, errorThrown ) {
+    alert( jqXHR+'/**/'+textStatus+'/**/'+errorThrown);
+});
 				
 				}, 250);
         
