@@ -1,73 +1,42 @@
 {
-    "prepare_queue": {
-        "installed": [],
-        "uninstalled": []
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "io.cordova.hellocordova"
     },
-    "config_munge": {
-        "files": {}
+    "cordova-plugin-dialogs": {
+      "PACKAGE_NAME": "io.cordova.hellocordova"
     },
-    "installed_plugins": {
-        "cordova-plugin-battery-status": {
-            "PACKAGE_NAME": "OWLNETID"
-        },
-        "cordova-plugin-camera": {
-            "PACKAGE_NAME": "OWLNETID"
-        },
-        "cordova-plugin-console": {
-            "PACKAGE_NAME": "OWLNETID"
-        },
-        "cordova-plugin-contacts": {
-            "PACKAGE_NAME": "OWLNETID"
-        },
-        "cordova-plugin-device": {
-            "PACKAGE_NAME": "OWLNETID"
-        },
-        "cordova-plugin-device-motion": {
-            "PACKAGE_NAME": "OWLNETID"
-        },
-        "cordova-plugin-device-orientation": {
-            "PACKAGE_NAME": "OWLNETID"
-        },
-        "cordova-plugin-dialogs": {
-            "PACKAGE_NAME": "OWLNETID"
-        },
-        "cordova-plugin-file-transfer": {
-            "PACKAGE_NAME": "OWLNETID"
-        },
-        "cordova-plugin-geolocation": {
-            "PACKAGE_NAME": "OWLNETID"
-        },
-        "cordova-plugin-globalization": {
-            "PACKAGE_NAME": "OWLNETID"
-        },
-        "cordova-plugin-inappbrowser": {
-            "PACKAGE_NAME": "OWLNETID"
-        },
-        "cordova-plugin-media": {
-            "PACKAGE_NAME": "OWLNETID"
-        },
-        "cordova-plugin-media-capture": {
-            "PACKAGE_NAME": "OWLNETID"
-        },
-        "cordova-plugin-network-information": {
-            "PACKAGE_NAME": "OWLNETID"
-        },
-        "cordova-plugin-splashscreen": {
-            "PACKAGE_NAME": "OWLNETID"
-        },
-        "cordova-plugin-statusbar": {
-            "PACKAGE_NAME": "OWLNETID"
-        },
-        "cordova-plugin-vibration": {
-            "PACKAGE_NAME": "OWLNETID"
-        },
-        "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "OWLNETID"
-        }
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "io.cordova.hellocordova"
     },
-    "dependent_plugins": {
-        "cordova-plugin-file": {
-            "PACKAGE_NAME": "OWLNETID"
-        }
+    "cordova-plugin-camera": {
+      "CAMERA_USAGE_DESCRIPTION": " ",
+      "PHOTOLIBRARY_USAGE_DESCRIPTION": " ",
+      "PACKAGE_NAME": "io.cordova.hellocordova"
+    },
+    "cordova-plugin-compat": {
+      "PACKAGE_NAME": "io.cordova.hellocordova"
+    },
+    "cordova-plugin-file": {
+      "PACKAGE_NAME": "io.cordova.Nirjob"
+    },
+    "cordova-plugin-file-transfer": {
+      "PACKAGE_NAME": "io.cordova.Nirjob"
+    },
+    "cordova-plugin-local-notification": {
+      "PACKAGE_NAME": "io.cordova.Nirjob"
     }
+  },
+  "dependent_plugins": {
+    "cordova-plugin-app-event": {
+      "PACKAGE_NAME": "io.cordova.Nirjob"
+    }
+  }
 }
